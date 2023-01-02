@@ -1,4 +1,3 @@
-
 # http://i3wm.org/docs/userguide.html
 
       #SET $mod key on SUPER
@@ -53,21 +52,22 @@ bindsym $alt+Control+f exec termite -e "sh .scripts/web_search.sh"
 bindsym $alt+Control+o exec termite -e "sh .scripts/whisper.sh"
 bindsym $alt+Control+y exec termite -e "sh .scripts/translate.sh"
 bindsym $alt+Control+m exec termite -e "sh .scripts/media-converter.sh"
+bindsym $alt+Control+u exec termite -e "sh .scripts/alarm.sh"
 
     # XF86 Fn keys
 
 # change volume or toggle mute
 
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym XF86AudioRaiseVolume exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym XF86AudioLowerVolume exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
 
-bindsym Control+Up exec amixer -q -D pulse sset Master 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym Control+Up exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
-bindsym Control+Down exec amixer -q -D pulse sset Master 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym Control+Down exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
-bindsym XF86AudioMute exec exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec exec amixer sset Master toggle && pkill -RTMIN+1 i3blocks
 
 bindsym XF86AudioPlay exec --no-startup-id audacious --play
 bindsym XF86AudioPrev exec --no-startup-id audacious --prev

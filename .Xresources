@@ -1,0 +1,14 @@
+xterm*background: #000000
+xterm*foreground: #55FF99
+xterm*cursorColor:#33FF99
+
+XTerm*transparent: true
+
+!xterm*pointerShape:arrow
+xterm*faceName:Terminus:style=Regular:size=11
+                 Shift <Key>Insert:    insert-selection(SELECT) \n
+                 Ctrl <Key>Insert:     copy-selection(SELECT) \n
+                 Ctrl Shift <Key>V:    insert-selection(SELECT) \n
+                 Ctrl Shift <Key>C:    copy-selection(SELECT) \n
+
+Xcursor.theme: Dimension

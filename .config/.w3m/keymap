@@ -1,0 +1,152 @@
+# Ctrl  : C-, ^
+# Escape: ESC-, M-, ^[
+# Space : SPC, ' '
+# Tab   : TAB, ^i, ^I
+# Delete: DEL, ^?
+# Up    : UP, ^[[A
+# Down  : DOWN, ^[[B
+# Right : RIGHT, ^[[C
+# Left  : LEFT, ^[[D
+
+
+#keymap    C-l    NULL
+#keymap    C-h    NULL
+#keymap    C-j    NULL
+#keymap    C-m    NULL
+#keymap    C-q    NULL
+#keymap    :      NULL
+#keymap    ";"    NULL
+#keymap    C-g    NULL
+#keymap    C-u    NULL
+#keymap    $      NULL
+#keymap    C-v    NULL
+#keymap    SPC    NULL
+#keymap    C-s    NULL
+#keymap    ?      NULL
+#keymap    M-TAB  NULL
+#keymap    M-C-j  NULL
+#keymap    M-C-m  NULL
+#keymap    I      NULL
+#keymap    a      NULL
+#keymap    /      NULL
+#keymap    C-w    NULL
+#keymap    M-w    NULL
+#keymap    M-W    NULL
+#keymap    C-z    NULL
+#keymap    J      NULL
+#keymap    K      NULL
+
+
+
+### MARK ###
+keymap    C-@    MARK
+keymap    \"     REG_MARK
+keymap    /      MARK_URL
+keymap    ";"    MARK_WORD
+keymap    M-:    MARK_MID
+keymap    M-p    PREV_MARK
+keymap    M-n    NEXT_MARK
+
+### WORDS ###
+keymap    M-w     NEXT_WORD
+keymap    M-W     PREV_WORD
+
+### LINES ###
+keymap    I      LINE_BEGIN
+keymap    A      LINE_END
+keymap    ?      LINE_INFO
+keymap    :?     GOTO_LINE
+
+### TABS ###
+keymap    TAB    NEW_TAB
+keymap    q      CLOSE_TAB
+keymap    t      NEXT_TAB
+keymap    T      PREV_TAB
+
+### LINKS ###
+keymap    SPC    NEXT_LINK
+keymap    C-SPC  PREV_LINK
+keymap    O      GOTO_LINK
+keymap    C-t    TAB_LINK
+keymap    p      PEEK_LINK
+
+### HISTORY ###
+keymap    h      HISTORY
+
+### SEARCH ###
+keymap    /      SEARCH
+keymap    C-N    SEARCH_BACK
+keymap    N      SEARCH_PREV
+keymap    n      SEARCH_NEXT
+
+### COMMAND ###
+keymap    !      SHELL
+keymap    #      PIPE_SHELL
+keymap    @      READ_SHELL
+keymap    ::     COMMAND
+
+### ACTIONS ###
+keymap    u      UNDO
+keymap    C-r    REDO
+keymap    R      RELOAD
+keymap    c      PEEK
+keymap    v      VIEW
+keymap    V      LOAD
+keymap    m      MOUSE_TOGGLE
+
+### NAVIGATION ###
+keymap    U        NEXT_PAGE
+keymap    Z        PREV_PAGE
+keymap    ,        LEFT
+keymap    .        RIGHT
+keymap    >        SHIFT_RIGHT
+keymap    <        SHIFT_LEFT
+keymap    B        BACK
+keymap    G        END
+keymap    g        BEGIN
+keymap    M-u      GOTO_RELATIVE
+keymap    UP       MOVE_UP
+keymap    DOWN     MOVE_DOWN
+keymap    RIGHT    MOVE_RIGHT
+keymap    LEFT     MOVE_LEFT
+keymap    z        CENTER_V
+keymap    Z        CENTER_H
+keymap    o        GOTO
+
+### EXTERNAL ###
+keymap    Y    EXTERN
+keymap    y    EXTERN_LINK
+
+### IMAGES ###
+keymap    j     VIEW_IMAGE
+keymap    :j    SAVE_IMAGE
+keymap    J     PEEK_IMG
+
+### BOOKMARKS ###
+keymap    C-a    ADD_BOOKMARK
+keymap    C-b    BOOKMARK
+
+### MENU ###
+keymap    M       MENU
+keymap    :t      TAB_MENU
+keymap    M-l     LIST_MENU
+keymap    M-m     MOVE_LIST_MENU
+keymap    m       SELECT_MENU
+keymap    l       LIST
+keymap    :w      SAVE
+keymap    w       SAVE_SCREEN
+keymap    :o      OPTIONS
+keymap    :set    SET_OPTION
+keymap    C-k     COOKIE
+keymap    D       DOWNLOAD_LIST
+keymap    E       EDIT
+keymap    M-k     DEFINE_KEY
+keymap    F       FRAME
+keymap    |       PIPE_BUF
+keymap    :h      HELP
+keymap    =       INFO
+keymap    r       VERSION
+
+### EXIT ###
+keymap    :q!   EXIT
+keymap    :q    QUIT

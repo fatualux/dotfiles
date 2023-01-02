@@ -1,0 +1,38 @@
+#!/usr/bin/bash
+
+dir=$(dirname $0)
+source $dir/util.sh
+full=""
+short=""
+status=0
+getBrightness() {
+	light -G
+}
+case "$BLOCK_BUTTON" in
+	# scroll up
+	# raise bright
+	4) light -A 10;;
+	# scroll down
+	# lower bright
+	5) light -U 10;;
+esac
+light=$(getBrightness)
+# level-based icon
+if (( $light == 0 )); then
+#	no bright
+	icon=""
+elif (( $light < 50 )); then
+#	low bright
+	icon=""
+elif (( $light < 100)); then
+#	high bright
+	icon=""
+else
+#	full bright
+	icon=""
+fi
+full="$icon ${light%.*}%"
+short=$light
+echo $full
+echo $short
+exit $status

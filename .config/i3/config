@@ -46,7 +46,7 @@ bindsym $alt+Control+n exec telegram-desktop
 bindsym $alt+Control+t exec termite
 bindsym $alt+Control+k exec keepassxc
 bindsym $alt+Control+g exec termite -e "vim"
-bindsym $alt+Control+a exec termite -e "ranger"
+bindsym $alt+Control+a exec termite -e "joshuto"
 bindsym $alt+Control+d exec termite -e "sh .scripts/youtube-dl.sh"
 bindsym $alt+Control+f exec termite -e "sh .scripts/web_search.sh"
 bindsym $alt+Control+o exec termite -e "sh .scripts/whisper.sh"

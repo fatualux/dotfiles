@@ -81,14 +81,15 @@ _ls_colors_add zip jar xpi            # archives
 _ls_colors_add jpg ico JPG PNG webp   # images
 _ls_colors_add ogg opus               # audio (opus now included by default)
 
-if ls -ld --color=auto / >/dev/null 2>&1
-  then alias ls="ls -ph --color=auto"
-  else alias ls="ls -ph"
-fi
-
-###Default color:w
-
+###Default color:
 export PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
+
+CURRENTUSER=`whoami`
+if [ "$CURRENTUSER" = "root" ]; then
+  PS1='\[\033[1;31m\]\u@$HOSTNAME:\w #\[\033[0m\] '
+else
+  PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
+fi
 
 ################################################################################################
 # INITIAL SCREEN
@@ -131,13 +132,15 @@ PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'disown -a -h'
 #Default apps
 ################################################################################################
 export BROWSER='firefox'
-export EDITOR='gvim'
+export VISUAL=vim
+export EDITOR=vim
 ################################################################################################
 # add user-installed apps to my PATH
 ################################################################################################
+export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/bin/whisper"
-export PATH="$PATH:$HOME/.local/bin/flutter/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 #replace Chrome with Chromium
 export CHROME_EXECUTABLE="/bin/chromium"
@@ -151,6 +154,10 @@ alias locate="locate $LOCATEOPTIONS"
 alias lo="locate $LOCATEOPTION"
 alias loi="locate -i $LOCATEOPTION"
 alias lor="locate -r $LOCATEOPTION"
+alias wifite="cd $HOME/Downloads && sudo wifite "
+alias fluxion="cd $HOME/Downloads && sudo fluxion "
+alias x="startx "
+alias e="exit "
 
 #option for bash-completion
 if ! shopt -oq posix; then

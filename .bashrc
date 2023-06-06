@@ -1,8 +1,11 @@
 #!/bin/bash
 
-# Check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+################################################################################################
+# add user-installed apps to my PATH
+################################################################################################
+export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 ################################################################################################
 # Hystory settings
@@ -37,7 +40,7 @@ export HISTSIZE=1000
 
 # shopt options
 shopt -s cdspell         # This will correct minor spelling errors in a cd command.
-shopt -s checkwinsize    # Check window after each command
+shopt -s checkwinsize    # Check window after each command and updates the values of LINES and COLUMNS
 shopt -s histappend      # Append History instead of overwriting file
 shopt -s cmdhist         # try to save all lines of a multiple-line command in the same entry
 
@@ -45,7 +48,7 @@ shopt -s cmdhist         # try to save all lines of a multiple-line command in t
 # COLORS
 ################################
 
-#Colors for man pages:
+# Colors for man pages:
 
 function _colorman() {
   env \
@@ -81,15 +84,12 @@ _ls_colors_add zip jar xpi            # archives
 _ls_colors_add jpg ico JPG PNG webp   # images
 _ls_colors_add ogg opus               # audio (opus now included by default)
 
-###Default color:
-export PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
-
-CURRENTUSER=`whoami`
-if [ "$CURRENTUSER" = "root" ]; then
-  PS1='\[\033[1;31m\]\u@$HOSTNAME:\w #\[\033[0m\] '
-else
-  PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
-fi
+force_color_prompt=yes
+    if [ "$LOGNAME" = root ] || [ "`id -u`" -eq 0 ] ; then
+        PS1='\[\031[01;31m\]\u@\h\[\031[00m\]:\[\031[01;34m\]\w\[\031[01;34m\]#\031[00m\] '
+    else
+        PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
+    fi
 
 ################################################################################################
 # INITIAL SCREEN
@@ -115,37 +115,25 @@ echo "$days days, $hours hours, $minutes minutes, $seconds seconds";
 
 echo " "
 
+### Default color:
+export PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'
+
 ######################################################################################################
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    ./etc/bash_completion
-fi
 
-alias grep='grep --color=auto'
 
-#Disown application from terminal when launched by shell command
+# Disown application from terminal when launched by shell command
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'disown -a -h'
 
 ################################################################################################
-#Default apps
+# Default apps
 ################################################################################################
 export BROWSER='firefox'
 export VISUAL=vim
 export EDITOR=vim
-################################################################################################
-# add user-installed apps to my PATH
-################################################################################################
-export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$HOME/.local/bin"
-export PATH="$PATH:$HOME/.local/bin/whisper"
-export PATH="$PATH:$HOME/.cargo/bin"
-
 #replace Chrome with Chromium
 export CHROME_EXECUTABLE="/bin/chromium"
 
-#advanced locate
+# Advanced locate
 UPDATEDBOPTIONS="--require-visibility 0 -o ~/.locate.db"
 alias updatedb="updatedb $UPDATEDBOPTIONS"
 alias updb="updatedb"
@@ -154,12 +142,17 @@ alias locate="locate $LOCATEOPTIONS"
 alias lo="locate $LOCATEOPTION"
 alias loi="locate -i $LOCATEOPTION"
 alias lor="locate -r $LOCATEOPTION"
-alias wifite="cd $HOME/Downloads && sudo wifite "
-alias fluxion="cd $HOME/Downloads && sudo fluxion "
-alias x="startx "
-alias e="exit "
 
-#option for bash-completion
+# Aliases
+alias grep='grep --color=auto'
+alias fluxion="cd $HOME/Downloads && sudo fluxion "
+alias tor-browser="sh Downloads/tor-browser/Browser/start-tor-browser"
+alias pip="python -m pip"
+alias pip3="python3 -m pip"
+alias wifite="cd $HOME/Downloads && sudo wifite "
+alias tor="sh -c '"/home/fz/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "/home/fz/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
+
+# Option for bash-completion
 if ! shopt -oq posix; then
 if [ -f /usr/share/bash-completion/bash_completion ]; then
 . /usr/share/bash-completion/bash_completion
@@ -167,3 +160,19 @@ elif [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
 fi
 fi
+
+# >>> conda initialize >>>
+
+# !! Contents within this block are managed by 'conda init' !!
+
+__conda_setup="$('/home/fz/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/fz/.conda/etc/profile.d/conda.sh" ]; then
+        . "/home/fz/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/fz/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup

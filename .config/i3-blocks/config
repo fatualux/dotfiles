@@ -24,8 +24,7 @@ interval=1
 #min_width="0%"
 
 [audio]
-#label=
-interval=once
+interval=repeat
 signal=1
 
 [packages]
@@ -63,6 +62,7 @@ interval=1
 
 [bluetooth]
 label=
+color=#0000FF
 interval=1
 
 [poweroff]

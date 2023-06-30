@@ -1,12 +1,12 @@
 #!/bin/bash
 
-STATUS=$(rfkill list 1 | grep -wo 'no')
+STATUS=$(rfkill list 0 | grep -wo 'no')
 
 if [[ "${STATUS}" != "no" ]]; then
-        echo "ON"
+        echo " ON"
 else
-        echo "OFF"
-        echo "OFF"
+        echo " OFF"
+        echo " OFF"
         echo ""
 fi
 

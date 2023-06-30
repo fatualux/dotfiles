@@ -70,6 +70,14 @@ function print_format {
  esac
 }
 
+function left_click {
+  # Left click
+  if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+        dunstify -t 1675 -h string:fgcolor:#FFFFFF -h string:bgcolor:#882223 "Audio Settings" && pavucontrol
+  fi
+}
+
+
 function print_block {
  for name in NAME; do
   read $name
@@ -108,5 +116,4 @@ function print_block {
 }
 
 print_block
-
-
+left_click

@@ -24,7 +24,9 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
   # BATTERY < 10
   ICON=""
   COLOR="#FF2222"
-  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#FF0013 "LOW BATTERY! Please charge now!" && sleep 3
+  MESSAGE="LOW BATTERY! Please charge now!"
+  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#FF0013 $MESSAGE && sleep 5
+  espeak "$MESSAGE"
 
 elif [[ "${BATTERY_POWER}" -le 25 ]]; then
   # 10 < BATTERY < 25
@@ -58,5 +60,7 @@ echo $COLOR
 
 if [ "$battery_level" -gt 99 ]
 then
-    dunstify -h string:fgcolor:#000000 -h string:bgcolor:#66FF13 "FULLY CHARGED! Please disconnect from power source." && sleep 3
+  MESSAGE="Battery Full! Please disconnect from power source."
+  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#66FF13 $MESSAGE && sleep 5
+  espeak "$MESSAGE"
 fi

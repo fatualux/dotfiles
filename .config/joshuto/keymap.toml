@@ -77,31 +77,32 @@ keymap = [
  { keys = [ "a" ],  command = "rename_append" },
  { keys = [ "A" ],  command = "rename_prepend" },
 
- { keys = [ "f", "t" ],  command = ":touch " },
+ { keys = [ "t" ],  command = ":touch " },
 
  { keys = [ " " ],  command = "select --toggle=true" },
- { keys = [ "V" ],  command = "select --all=true --toggle=true" },
- { keys = [ "v" ],  command = "toggle_visual"},
+ { keys = [ "ctrl+a" ],  command = "select --all=true --toggle=true" },
+ { keys = ["V"], command = "toggle_visual" },
 
  { keys = [ "w" ],  command = "show_tasks --exit-key=w" },
- { keys = [ "B", "B" ],  command = "bulk_rename" },
+ { keys = [ "b", "b" ],  command = "bulk_rename" },
  { keys = [ "=" ],  command = "set_mode" },
 
  { keys = [ ":" ],  command = ":" },
  { keys = [ ";" ],  command = ":" },
 
- { keys = [ "'" ],  command = ":shell " },
+ { keys = [ "-" ],  command = ":shell " },
+ { keys = [ "T" ],  command = ":shell alacritty" },
  { keys = [ "m", "k", "d" ],  command = ":mkdir " },
  { keys = [ "r", "n", "m" ],  command = ":rename " },
+ { keys = [ "z" ],  command = "zip" },
 
  { keys = [ "/" ],  command = ":search " },
- { keys = [ "|" ],  command = ":search_inc " },
- { keys = [ "\\" ],  command = ":search_glob " },
- { keys = [ "S" ],  command = "search_fzf" },
+ { keys = [ "f" ],  command = ":search_inc " },
+ { keys = [ "S" ],  command = ":search_glob " },
+ { keys = [ "ctrl+f" ],  command = "search_fzf" },
  { keys = [ "C" ],  command = "subdir_fzf" },
  { keys = [ "n" ],  command = "search_next" },
  { keys = [ "N" ],  command = "search_prev" },
- { keys = [ "ctrl+f" ],  command = ":shell fzf" },
 
  { keys = [ "s", "r" ],  command = "sort reverse" },
  { keys = [ "s", "l" ],  command = "sort lexical" },

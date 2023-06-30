@@ -1,7 +1,9 @@
 [class]
 audio_default = [
+ { command = "mpv" },
  { command = "vlc", args = [ "--" ] },
  { command = "mediainfo", confirm_exit = true },
+ { command = "audacity" },
 ]
 
 image_default = [
@@ -21,10 +23,13 @@ text_default = [
  { command = "vim" },
  { command = "code", fork = true, silent = true },
  { command = "bat", args = [ "--paging=always" ] },
+ { command = "sh" },
 ]
 
 reader_default = [
  { command = "evince", fork = true, silent = true },
+ { command = "lodraw" },
+
 ]
 
 libreoffice_default = [
@@ -45,6 +50,10 @@ pgm.inherit = "image_default"
 png.inherit = "image_default"
 ppm.inherit = "image_default"
 webp.inherit = "image_default"
+opus.inherit = "audio_default"
+tiff.inherit = "image_default"
+tga.inherit = "image_default"
+tif.inherit = "image_default"
 
 svg.app_list = [
  { command = "inkview", fork = true, silent = true },
@@ -91,6 +100,8 @@ h.inherit = "text_default"
 hpp.inherit = "text_default"
 hs.inherit = "text_default"
 html.inherit = "text_default"
+php.inherit = "text_default"
+sql.inherit = "text_default"
 ini.inherit = "text_default"
 java.inherit = "text_default"
 js.inherit = "text_default"
@@ -115,6 +126,9 @@ vim.inherit = "text_default"
 xml.inherit = "text_default"
 yaml.inherit = "text_default"
 yml.inherit = "text_default"
+tmpl.inherit = "text_default"
+theme.inherit = "text_default"
+rst.inherit = "text_default"
 
 # archive formats
 7z.app_list = [
@@ -163,6 +177,9 @@ xls.inherit = "libreoffice_default"
 xlsx.inherit = "libreoffice_default"
 ppt.inherit = "libreoffice_default"
 pptx.inherit = "libreoffice_default"
+
+html.app_list = [
+ { command = "firefox" }]
 
 pdf.inherit = "reader_default"
 

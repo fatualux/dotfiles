@@ -50,17 +50,6 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 let g:codeium_enabled = v:true
 
-
-" YouCompleteMe settings
-let pycm = expand('pwd') . "/.ycm_extra_conf.py"
-if filereadable(pycm)
-  let g:ycm_global_ycm_extra_conf = pycm
-else
-  let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
-endif
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_auto_trigger = 0
-
 " multi-cursor mapping
 let g:multi_cursor_start_word_key      = '<C-n>'
 let g:multi_cursor_select_all_word_key = '<A-n>'

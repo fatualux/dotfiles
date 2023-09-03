@@ -32,15 +32,12 @@ vnoremap p "_dP
 "PLUGINS
 call plug#begin('~/.vim/bundle')
 Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/vim-easy-align'
-Plug 'vim-syntastic/syntastic'
+"Plug 'junegunn/vim-easy-align'
+"Plug 'vim-syntastic/syntastic'
 Plug 'lilydjwg/colorizer'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Yggdroot/indentLine'
 Plug 'Exafunction/codeium.vim'
 Plug 'alvan/vim-closetag'
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-colorscheme-switcher'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
@@ -315,3 +312,7 @@ fu! Fuzzy()
     cnoremap <buffer> / \/
     nnoremap <buffer> <cr> gf:bd! #<cr>
 endf
+
+" show current branch:
+
+au VimEnter,CmdlineLeave,BufEnter,BufNewFile * silent exe 'setl statusline=' .expand("%") .'\ \|\ ' .system("git branch | grep -e '^*' | sed 's/^* //'")

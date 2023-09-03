@@ -44,11 +44,12 @@ bindsym $alt+Control+h exec dunstify -r 333 "PCManFM" && pcmanfm
 bindsym $alt+Control+n exec dunstify -r 333 "TELEGRAM" && telegram-desktop
 bindsym $alt+Control+t exec dunstify -r 333 "SHELL" && alacritty
 bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
-bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e "vim"
-bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && alacritty -e "joshuto"
-bindsym $alt+Control+w exec alacritty -e "sh .scripts/ytStream.sh"
-bindsym $alt+Control+m exec alacritty -e "sh .scripts/scriptLauncher.sh"
-bindsym $alt+Control+y exec alacritty -e "sh .scripts/translate.sh"
+bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
+bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && alacritty -e joshuto
+bindsym $alt+Control+w exec alacritty -e sh .scripts/ytStream.sh
+bindsym $alt+Control+m exec alacritty -e sh "Thunderbird" && thunderbird
+bindsym $alt+Control+x exec alacritty -e sh .scripts/scriptLauncher.sh
+bindsym $alt+Control+y exec alacritty -e sh .scripts/translate.sh
 
     # XF86 Fn keys
 
@@ -59,9 +60,9 @@ bindsym XF86AudioRaiseVolume exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3bl
 bindsym XF86AudioLowerVolume exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
 
-bindsym Control+Up exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+#bindsym Control+Up exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
-bindsym Control+Down exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+#bindsym Control+Down exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
 bindsym XF86AudioMute exec exec amixer sset Master toggle && pkill -RTMIN+1 i3blocks
 
@@ -206,6 +207,7 @@ exec --no-startup-id dunst &
 exec_always --no-startup-id nm-applet
 exec_always --no-startup-id "picom -b --experimental-backend"
 exec_always --no-startup-id "i3-autolayout autolayout"
+exec_always --no-startup-id telegram-desktop
 
 # Windows rules
 for_window [class="Pinentry"] floating enable
@@ -214,6 +216,7 @@ for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+for_window [window_type="mpv"] floating enable
 for_window [class=".*"] border pixel 3
 for_window [class="(?i)alacritty"] floating enable
 
@@ -222,7 +225,7 @@ for_window [instance="scratchpad"] move window to scratchpad
 for_window [class="Firefox"] border pixel 1
 assign [class="Telegram"] → 0
 assign [class="firefox"] → 1
-assign [class="VeraCrypt"] → 0
+assign [class="keepassxc"] → 1
 
 #custom app commands (?i) case insenitive
 for_window [class="(?i)XTerm"] floating enable move right 660px, move down 300px

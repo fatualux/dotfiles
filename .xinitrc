@@ -2,6 +2,11 @@ enable_xauth=0
 
 setxkbmap it &
 numlockx &
+picom &
+
+#enabling lock-screen - pacman -Syu xss-lock i3lock
+xss-lock --transfer-sleep-lock -- i3lock --nofork &
+
 
 hsetroot -solid "#000000"
 

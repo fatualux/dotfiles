@@ -150,7 +150,17 @@ alias tor-browser="sh Downloads/tor-browser/Browser/start-tor-browser"
 alias pip="python -m pip"
 alias pip3="python3 -m pip"
 alias wifite="cd $HOME/Downloads && sudo wifite "
-alias tor="sh -c '"/home/fz/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "/home/fz/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
+alias tor="sh -c '"$HOME/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "$HOME/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
+alias powertop="sudo powertop --auto-tune && sudo powertop"
+alias wifite="cd $HOME/Downloads && sudo wifite "
+alias scrcpy="scrcpy -w & "
+alias wget="aria2c"
+alias launcher="sh $HOME/.scripts/scriptLauncher.sh"
+alias converter="sh $HOME/.scripts/converter.sh"
+alias bgremover="sh $HOME/.scripts/bgremover.sh"
+alias img2vid="sh $HOME/.scripts/img2vid.sh"
+alias ocr="sh $HOME/.scripts/tesseract.sh"
+alias rmdup="sh $HOME/.scripts/rmDuplicate.sh"
 
 # Option for bash-completion
 if ! shopt -oq posix; then
@@ -165,14 +175,14 @@ fi
 
 # !! Contents within this block are managed by 'conda init' !!
 
-__conda_setup="$('/home/fz/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.conda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/fz/.conda/etc/profile.d/conda.sh" ]; then
-        . "/home/fz/.conda/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.conda/etc/profile.d/conda.sh"
     else
-        export PATH="/home/fz/.conda/bin:$PATH"
+        export PATH="$HOME/.conda/bin:$PATH"
     fi
 fi
 unset __conda_setup

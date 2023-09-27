@@ -313,6 +313,16 @@ fu! Fuzzy()
     nnoremap <buffer> <cr> gf:bd! #<cr>
 endf
 
-" show current branch:
+" show git branch
+fun! GitBranch(file)
+    let l:dir = fnamemodify(system('readlink -f ' . a:file), ':h')
+    let l:cmd = 'git -C ' . l:dir . ' branch --show-current 2>/dev/null'
+    let b:git_current_branch = trim(system(l:cmd))
+endfun
 
-au VimEnter,CmdlineLeave,BufEnter,BufNewFile * silent exe 'setl statusline=' .expand("%") .'\ \|\ ' .system("git branch | grep -e '^*' | sed 's/^* //'")
+augroup GitBranch
+    autocmd!
+    autocmd BufEnter,ShellCmdPost,FileChangedShellPost * call GitBranch(expand('%'))
+augroup END
+
+set rulerformat=%32(%=%{b:git_current_branch}%=%8l,%-6(%c%V%)%=%4p%%%)

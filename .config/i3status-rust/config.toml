@@ -85,7 +85,6 @@ cmd = "blueberry"
 "21..70" = "warning"
 "71..100" = "good"
 
-
 [[block]]
 block = "time"
 interval = 5

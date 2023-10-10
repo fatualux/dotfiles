@@ -327,26 +327,29 @@ set rulerformat=%32(%=%{b:git_current_branch}%=%8l,%-6(%c%V%)%=%4p%%%)
 
 function! DetectLineChanges()
   let file_name = expand('%')
-  let commit_message = "Edited " . file_name
+  let commit_message = 'Edited ' . file_name
 
   let choice = inputdialog('Changes detected in ' . file_name . '. Do you want to add the file to the repository?')
 
   if choice == 'y' || choice == 'Y' || choice == 'yes' || choice == 'Yes' || choice == 'YES'
     execute ':!git add %'
 
-    let additional_comments = input('Add additional comments (leave empty to skip): ')
+    let additional_comments = inputdialog('Add additional comments (leave empty to skip):')
 
     if !empty(additional_comments)
-      let commit_message .= "\n\n" . additional_comments
+      let commit_message .= ' ' . additional_comments
     endif
 
-    execute ':!git commit -m "' . substitute(commit_message, '"', '\\"', 'g') . '"'
+    let escaped_commit_message = substitute(commit_message, '"', '\\"', 'g')
+    execute ':!git commit -m """' . escaped_commit_message . '"""'
 
     let push_choice = inputdialog('Commit successful. Do you want to push the changes?')
 
     if push_choice == 'Yes' || push_choice == 'yes' || push_choice == 'y' || push_choice == 'Y' || push_choice == 'YES'
       execute ':!git push'
     endif
+  elseif choice == 'n' || choice == 'N' || choice == 'no' || choice == 'No' || choice == 'NO'
+    return
   endif
 endfunction
 

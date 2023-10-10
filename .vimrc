@@ -32,14 +32,13 @@ vnoremap p "_dP
 "PLUGINS
 call plug#begin('~/.vim/bundle')
 Plug 'terryma/vim-multiple-cursors'
-"Plug 'junegunn/vim-easy-align'
-"Plug 'vim-syntastic/syntastic'
 Plug 'lilydjwg/colorizer'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Exafunction/codeium.vim'
 Plug 'alvan/vim-closetag'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'python-mode/python-mode'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 let g:indentLine_setColors = 0
@@ -56,23 +55,6 @@ let g:multi_cursor_next_key            = '<C-n>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
-
-
-" syntactic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
-highlight link SyntasticStyleErrorSign SignColumn
-highlight link SyntasticStyleWarningSign SignColumn
 
 " Color settings
 let g:solarized_termcolors=256
@@ -313,6 +295,20 @@ fu! Fuzzy()
     nnoremap <buffer> <cr> gf:bd! #<cr>
 endf
 
+" Settings for pymode
+
+let g:pymode = 1
+let g:pymode_warnings = 1
+let g:pymode_trim_whitespaces = 1
+let g:pymode_options_max_line_length = 79
+let g:pymode_options_colorcolumn = 1
+let g:pymode_indent = 1
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_message = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pycodestyle', 'mccabe', 'pep257', 'pylint', 'pyflake8']
+let g:pymode_lint_signs = 1
+
 " show git branch
 fun! GitBranch(file)
     let l:dir = fnamemodify(system('readlink -f ' . a:file), ':h')
@@ -326,3 +322,32 @@ augroup GitBranch
 augroup END
 
 set rulerformat=%32(%=%{b:git_current_branch}%=%8l,%-6(%c%V%)%=%4p%%%)
+
+" Autodetect file changes when written and git commit
+
+function! DetectLineChanges()
+  let file_name = expand('%')
+  let commit_message = "Edited " . file_name
+
+  let choice = inputdialog('Changes detected in ' . file_name . '. Do you want to add the file to the repository?')
+
+  if choice == 'y' || choice == 'Y' || choice == 'yes' || choice == 'Yes' || choice == 'YES'
+    execute ':!git add %'
+
+    let additional_comments = input('Add additional comments (leave empty to skip): ')
+
+    if !empty(additional_comments)
+      let commit_message .= "\n\n" . additional_comments
+    endif
+
+    execute ':!git commit -m "' . substitute(commit_message, '"', '\\"', 'g') . '"'
+
+    let push_choice = inputdialog('Commit successful. Do you want to push the changes?')
+
+    if push_choice == 'Yes' || push_choice == 'yes' || push_choice == 'y' || push_choice == 'Y' || push_choice == 'YES'
+      execute ':!git push'
+    endif
+  endif
+endfunction
+
+autocmd BufWritePost * call DetectLineChanges()

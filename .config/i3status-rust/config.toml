@@ -76,7 +76,7 @@ empty_format = " $icon $percentage $time $power "
 block = "bluetooth"
 mac = "08:71:90:FD:4F:CF"
 format = "$icon $name{ $percentage|}"
-disconnected_format =  "$icon"
+disconnected_format =  "..: $icon :.."
 [[block.click]]
 button = "left"
 cmd = "blueberry"

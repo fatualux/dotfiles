@@ -209,7 +209,7 @@ exec_always --no-startup-id "picom -b --experimental-backend"
 exec_always --no-startup-id "i3-autolayout autolayout"
 exec_always --no-startup-id telegram-desktop
 exec_always --no-startup-id leep 60 && dwagent_monitor &
-exec_always --no-startup-id sh &HOME/.scripts/battery_alert.sh
+exec_always --no-startup-id sh $HOME/.scripts/battery_alert.sh
 
 # Windows rules
 for_window [class="Pinentry"] floating enable

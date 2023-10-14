@@ -183,22 +183,21 @@ bindsym $mod+r mode "resize"
 bindsym $mod+m exec i3-msg bar mode toggle
 
 ###BAR CONFIGURATION
-            bar {
-            status_command i3status-rs
-            i3bar_command i3bar
-            font pango: Xolonium 9
-            position top
-            mode dock
-            modifier Mod1
-            colors {
-                    background #000000
-                    statusline #FFFFFF
-                    separator #A0A0A0
-                    focused_workspace #080808 #30FF30 #000000
-                    active_workspace #080808 #080808 #797979
-                    inactive_workspace #080808 #080808 #4F4F4F
-                    urgent_workspace #080808 #080808 #FF4C59
-            }
+bar {
+status_command i3status-rs
+i3bar_command i3bar
+font pango: Xolonium 9
+position top
+mode dock
+modifier Mod1
+colors {
+        background #000000
+        statusline #FFFFFF
+        separator #A0A0A0
+        focused_workspace #080808 #30FF30 #000000
+        active_workspace #080808 #080808 #797979
+        inactive_workspace #080808 #080808 #4F4F4F
+        urgent_workspace #080808 #080808 #FF4C59
 }
 
 # Startup programs

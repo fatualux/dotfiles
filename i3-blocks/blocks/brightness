@@ -9,29 +9,23 @@ getBrightness() {
 }
 
 case "$BLOCK_BUTTON" in
-  # scroll up
-  # raise bright
-  4) xbacklight -inc 5;;
-  # scroll down
-  # lower bright
-  5) xbacklight -dec 5;;
+  # Scroll up, raise brightness
+  4) xbacklight -inc 10;;  # Increase the value to control the increment amount
+  # Scroll down, lower brightness
+  5) xbacklight -dec 10;;  # Increase the value to control the decrement amount
 esac
 
 light=$(getBrightness)
 
-# level-based icon
-if (( $light == 0 )); then
-# no bright
-  icon=""
-elif (( $light < 50 )); then
-# low bright
-  icon=""
-elif (( $light < 100)); then
-# high bright
-  icon=""
+# Set the default icon to "" (no brightness)
+icon=""
+
+if (( $(echo "$light < 50" | bc -l) )); then
+  icon=""  # Low brightness
+elif (( $(echo "$light < 100" | bc -l) )); then
+  icon=""  # Medium brightness
 else
-# full bright
-  icon=""
+  icon=""  # Full brightness
 fi
 
 full="$icon ${light%.*}%"
@@ -39,5 +33,3 @@ short=$light
 
 echo $full
 exit $status
-
-

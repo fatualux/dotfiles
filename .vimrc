@@ -29,6 +29,13 @@ autocmd VimResized * :wincmd =
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
 
+" Automatic installation of vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 "PLUGINS
 call plug#begin('~/.vim/bundle')
 Plug 'terryma/vim-multiple-cursors'

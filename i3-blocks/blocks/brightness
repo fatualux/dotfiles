@@ -1,0 +1,43 @@
+#!/usr/bin/bash
+
+full=""
+short=""
+status=0
+
+getBrightness() {
+  xbacklight -getf
+}
+
+case "$BLOCK_BUTTON" in
+  # scroll up
+  # raise bright
+  4) xbacklight -inc 5;;
+  # scroll down
+  # lower bright
+  5) xbacklight -dec 5;;
+esac
+
+light=$(getBrightness)
+
+# level-based icon
+if (( $light == 0 )); then
+# no bright
+  icon=""
+elif (( $light < 50 )); then
+# low bright
+  icon=""
+elif (( $light < 100)); then
+# high bright
+  icon=""
+else
+# full bright
+  icon=""
+fi
+
+full="$icon ${light%.*}%"
+short=$light
+
+echo $full
+exit $status
+
+

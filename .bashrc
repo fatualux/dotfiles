@@ -6,7 +6,6 @@
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
-
 ################################################################################################
 # Hystory settings
 ################################################################################################
@@ -155,12 +154,7 @@ alias powertop="sudo powertop --auto-tune && sudo powertop"
 alias wifite="cd $HOME/Downloads && sudo wifite "
 alias scrcpy="scrcpy -w & "
 alias wget="aria2c"
-alias launcher="sh $HOME/.scripts/scriptLauncher.sh"
-alias converter="sh $HOME/.scripts/converter.sh"
-alias bgremover="sh $HOME/.scripts/bgremover.sh"
-alias img2vid="sh $HOME/.scripts/img2vid.sh"
-alias ocr="sh $HOME/.scripts/tesseract.sh"
-alias rmdup="sh $HOME/.scripts/rmDuplicate.sh"
+alias ghlicense="source $HOME/.virtualenv/GH-license/bin/activate"
 
 # Option for bash-completion
 if ! shopt -oq posix; then

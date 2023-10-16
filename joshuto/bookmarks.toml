@@ -1,6 +1,7 @@
 bookmark = [
-	{ key = "r",	path = "/" },
-	{ key = "e",	path = "/etc" },
+  { key = "r",	path = "/" },
 
-	{ key = "h",	path = "~/" },
+  { key = "h",	path = "~/" },
+
+  { key = "u",	path = "/run/media/fz/" },
 ]

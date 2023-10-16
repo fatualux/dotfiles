@@ -208,6 +208,7 @@ exec_always --no-startup-id nm-applet
 exec_always --no-startup-id "picom -b --experimental-backend"
 exec_always --no-startup-id "i3-autolayout autolayout"
 exec_always --no-startup-id telegram-desktop
+exec_always --no-startup-id udiskie -2 -s &
 
 # Windows rules
 for_window [class="Pinentry"] floating enable

@@ -43,6 +43,10 @@ label=
 instance=mem;free
 interval=30
 
+[gpu]
+label=
+interval=10
+
 [load]
 label=
 interval=5

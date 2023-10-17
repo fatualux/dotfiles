@@ -2,4 +2,4 @@
 GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
 TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
 VRAM=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits)
-echo "$GPU_NAME | Temp: $TEMP°C | VRAM: $VRAM MiB"
+echo " $GPU_NAME | Temp: $TEMP°C | VRAM: $VRAM MiB"

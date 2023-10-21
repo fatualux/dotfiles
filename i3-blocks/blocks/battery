@@ -12,7 +12,13 @@ COLOR=""
 battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
 
 if [[ "${BATTERY_STATE}" = "Charging" ]]; then
-  if [[ "${BATTERY_POWER}" -le 94 ]]; then
+  if [ "$battery_level" -gt 81 ]; then
+  ICON=""
+  COLOR="#FFFFFF"
+  MESSAGE="Battery Full! Please disconnect from power source."
+  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#66FF13 $MESSAGE && sleep 5
+  espeak "$MESSAGE"
+  elif [[ "${BATTERY_POWER}" -le 94 ]]; then
   ICON=""
   COLOR="#FFFFFF"
   else
@@ -21,7 +27,6 @@ if [[ "${BATTERY_STATE}" = "Charging" ]]; then
   fi
 elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
   if [[ "${BATTERY_POWER}" -le 15 ]]; then
-  # BATTERY < 10
   ICON=""
   COLOR="#FF2222"
   MESSAGE="LOW BATTERY! Please charge now!"
@@ -29,17 +34,14 @@ elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
   espeak "$MESSAGE"
 
 elif [[ "${BATTERY_POWER}" -le 25 ]]; then
-  # 10 < BATTERY < 25
   ICON=""
   COLOR="#AA9922"
 
 elif [[ "${BATTERY_POWER}" -le 50 ]]; then
-  # 25 < BATTERY < 50
   ICON=""
   COLOR="#99FF33"
 
 elif [[ "${BATTERY_POWER}" -le 75 ]]; then
-  # 50 < BATTERY < 75
   ICON=""
   COLOR="#11FF99"
 
@@ -57,10 +59,3 @@ fi
 echo "${ICON} ${BATTERY_POWER}% ${TIME_LEFT}"
 echo "${ICON} ${BATTERY_POWER}% ${TIME_LEFT}"
 echo $COLOR
-
-if [ "$battery_level" -gt 81 ]
-then
-  MESSAGE="Battery Full! Please disconnect from power source."
-  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#66FF13 $MESSAGE && sleep 5
-  espeak "$MESSAGE"
-fi

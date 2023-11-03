@@ -6,6 +6,7 @@
 export PATH="$PATH:$HOME/.scripts"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
+
 ################################################################################################
 # Hystory settings
 ################################################################################################
@@ -126,6 +127,7 @@ PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'disown -a -h'
 ################################################################################################
 # Default apps
 ################################################################################################
+
 export BROWSER='firefox'
 export VISUAL=vim
 export EDITOR=vim
@@ -151,8 +153,9 @@ alias pip3="python3 -m pip"
 alias wifite="cd $HOME/Downloads && sudo wifite "
 alias tor="sh -c '"$HOME/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "$HOME/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
 alias powertop="sudo powertop --auto-tune && sudo powertop"
-alias wifite="cd $HOME/Downloads && sudo wifite "
-alias scrcpy="scrcpy -w & "
+alias wifite="cd $HOME/Downloads && sudo wifite --dict $HOME/Documents/Projects/dict/*.txt"
+
+alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
 alias wget="aria2c"
 alias ghlicense="source $HOME/.virtualenv/GH-license/bin/activate"
 
@@ -180,3 +183,13 @@ else
     fi
 fi
 unset __conda_setup
+
+###Function to remove last history lines
+###It takes the offset argument: histdel 10 to remove last ten lines
+
+histdel(){
+  for h in $(seq $1 $2); do
+    history -d $1
+  done
+  history -d $(history 1 | awk '{print $1}')
+  }

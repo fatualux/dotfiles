@@ -186,10 +186,9 @@ unset __conda_setup
 
 ###Function to remove last history lines
 ###It takes the offset argument: histdel 10 to remove last ten lines
-
-histdel(){
-  for h in $(seq $1 $2); do
-    history -d $1
-  done
-  history -d $(history 1 | awk '{print $1}')
+histdeln(){
+  # Get the current history number
+  n=$(history 1 | awk '{print $1}')
+  # Call histdel with the appropriate range
+  histdel $(( $n - $1 )) $(( $n - 1 ))
   }

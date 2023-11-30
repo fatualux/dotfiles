@@ -1,0 +1,34 @@
+#!/bin/bash
+
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+
+# Battery percentage at which to notify
+WARNING_LEVEL=20
+STATE_FILE=/tmp/battery_state
+
+while true; do
+    BATTERY_STATUS=$(acpi -b | grep "Battery 0" | grep -o "Discharging\|Charging")
+    BATTERY_LEVEL=$(acpi -b | grep "Battery 0" | grep -P -o '[0-9]+(?=%)')
+
+    if [ -e $STATE_FILE ]; then
+        PREVIOUS_STATE=$(cat $STATE_FILE)
+    else
+        PREVIOUS_STATE="Unknown"
+    fi
+
+    if [ "$BATTERY_STATUS" != "$PREVIOUS_STATE" ]; then
+        if [ "$BATTERY_STATUS" == "Discharging" ] && [ "$BATTERY_LEVEL" -le $WARNING_LEVEL ]; then
+            dunstify "Low Battery" "${BATTERY_LEVEL}% of battery remaining." -u critical -i "battery-alert" -r 9991 -t 2000
+            echo "$BATTERY_STATUS" > $STATE_FILE
+        elif [ "$BATTERY_STATUS" == "Charging" ] && [ "$BATTERY_LEVEL" -ge 80 ]; then
+            dunstify "Battery Charged" "Battery is fully charged." -i "battery" -r 9991
+            echo "$BATTERY_STATUS" > $STATE_FILE
+        fi
+    elif [ "$BATTERY_STATUS" == "Discharging" ] && [ "$BATTERY_LEVEL" -le $WARNING_LEVEL ]; then
+        dunstify "Low Battery" "${BATTERY_LEVEL}% of battery remaining." -u critical -i "battery-alert" -r 9991 -t 2000
+    fi
+
+    # Sleep for a while before checking again (e.g., every 5 seconds)
+    sleep 5
+done

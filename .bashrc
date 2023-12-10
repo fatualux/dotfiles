@@ -154,11 +154,11 @@ alias pip3="python3 -m pip"
 alias wifite="cd $HOME/Downloads && sudo wifite "
 alias tor="sh -c '"$HOME/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "$HOME/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
 alias powertop="sudo powertop --auto-tune && sudo powertop"
-alias wifite="cd $HOME/Downloads && sudo wifite --dict $HOME/Documents/Projects/dict/*.txt"
 
 alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
 alias wget="aria2c"
 alias ghlicense="source $HOME/.virtualenv/GH-license/bin/activate"
+alias optimus-manager="prime-offload && optimus-manager"
 
 # Option for bash-completion
 if ! shopt -oq posix; then

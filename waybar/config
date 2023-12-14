@@ -2,13 +2,13 @@
     "layer": "top",
     "position": "top",
     "height": 33,
-    "width": 150,
+    "width": 175,
     "margin": "3, 0, 2, 0",
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media", "sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom-separator", "clock",  "custom-separator", "network",  "tray"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom-separator", "clock",  "custom-separator", "custom/pacman", "network",     "netspeed", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -96,11 +96,11 @@
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
-        "bat": "BAT2"
+      "bat": "BAT2"
     },
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "interface": "wlan0",
+        "format-wifi": "{essid} ({signalStrength}%) -   {bandwidthDownBytes}  {bandwidthUpBytes}",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -126,16 +126,12 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    "custom/pacman": {
+        "format": "{}  ",
+        "interval": 60,                     // every hour
+        "exec": "checkupdates | wc -l",       // # of updates
+        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "on-click": "dunstify -t 1675 -h string:fgcolor:#FFFFFF -h string:bgcolor:#115F66 ' Packages Update' && alacritty -e trizen -Syu;  pkill -SIGRTMIN+8 waybar", // update system
+        "signal": 8
     }
 }

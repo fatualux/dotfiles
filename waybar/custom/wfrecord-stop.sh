@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkill -SIGINT wf-recorder && notify-send ' screen cap ended'
+pkill -SIGINT wf-recorder && dunstify ' screen cap ended'
 sleep .1
 
 # send signal to update monitor

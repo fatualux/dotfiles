@@ -2,14 +2,14 @@
 
 swaymsg workspace stats
 if [ "$1" == "cpu" ]; then
-    kitty "htop" "-s" "PERCENT_CPU"
+    alacritty -e "btop" "-s" "PERCENT_CPU"
     exit
 fi
 
 if [ "$1" == "memory" ]; then
-    kitty "htop" "-s" "M_RESIDENT"
+    alacritty -e "btop" "-s" "M_RESIDENT"
     exit
 fi
 
-kitty "htop"
+alacritty "btop"
 exit

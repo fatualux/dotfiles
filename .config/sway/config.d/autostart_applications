@@ -1,12 +1,6 @@
 # Auth with polkit-gnome:
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Reset waybar
-exec_always killall waybar
-
-# Desktop notifications
-exec dunst &
-
 # Pipewire
 exec pipewire
 
@@ -25,7 +19,14 @@ exec autotiling
 exec ~/.config/sway/scripts/light.sh
 
 # nm-applet
-exec nm-applet --indicator &
+exec nm-applet --indicator
+
+# Welcome
+exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+
+# Clipman
+exec clipman restore
+exec wl-paste -t text --watch clipman store
 
 # Gnome Keyring
 exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
@@ -36,17 +37,8 @@ exec libinput-gestures-setup start
 # Xdg DEsktop Portal
 exec /usr/libexec/xdg-desktop-portal
 
-# Cheatsheet
-exec micro ~/.config/sway/cheatsheet
-
-# MPD
-exec mpd &
+# Tracker daemon for gnome apps
+exec tracker daemon -s
 
 # swayrd
 exec_always swayrd
-
-# media-session
-exec_always pipewire-media-session start &
-
-# unset display
-exec_always unset DISPLAY &

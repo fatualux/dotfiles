@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom-separator", "custom/pacman", "clock", "custom-separator", "network", "netspeed", "tray"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom-separator", "custom/pacman", "clock", "custom-separator", "bluetooth", "network", "netspeed", "tray"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -133,7 +133,14 @@
         "interval": 3600,                     // every hour
         "exec": "checkupdates | wc -l",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "dunstify -t 1675 -h string:fgcolor:#FFFFFF -h string:bgcolor:#115F66 ' Packages Update' && alacritty -e trizen -Syu | wc -l;  pkill -SIGRTMIN+8 waybar", // update system
+        "on-click": "alacritty -e trizen -Syu | wc -l;  pkill -SIGRTMIN+8 waybar", // update system,
         "signal": 8
+    },
+    "bluetooth": {
+        "format": "",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "on-click": "blueberry"
     }
 }

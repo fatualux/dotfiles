@@ -1,0 +1,17 @@
+#!/bin/bash
+
+STATUS=$(rfkill list 0 | grep -wo 'no')
+
+if [[ "${STATUS}" != "no" ]]; then
+        echo " ON"
+else
+        echo " OFF"
+        echo " OFF"
+        echo ""
+fi
+
+
+# Left click
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+      dunstify -t 1675 -h string:fgcolor:#FFFFFF -h string:bgcolor:#11119F " BTManager" && blueberry
+fi

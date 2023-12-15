@@ -1,0 +1,10 @@
+#!/bin/bash
+GPU_NAME=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits)
+TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits)
+VRAM=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits)
+echo " $GPU_NAME - Temp: $TEMP°C - VRAM: $VRAM MiB"
+
+# Left-click
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  nvidia-settings
+fi

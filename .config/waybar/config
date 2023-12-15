@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom-separator", "custom/pacman", "clock", "custom-separator", "bluetooth", "network", "netspeed", "tray"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom/pacman", "bluetooth", "network", "netspeed", "tray", "clock", "custom/power"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -63,7 +63,7 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "on-click": "alacritty -e btop"
     },
     "memory": {
         "format": "{}% "
@@ -142,5 +142,10 @@
         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
         "on-click": "blueberry"
-    }
+    },
+    "custom/power": {
+      "format": "⏻",
+      "on-click": "~/.config/i3-blocks/blocks/poweroff",
+      "tooltip": false
+    },
 }

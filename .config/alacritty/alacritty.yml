@@ -1,0 +1,30 @@
+window:
+  # Window dimensions in character columns and lines
+  # Falls back to size specified by window manager if set to 0x0.
+  # (changes require restart)
+  dimensions:
+    columns: 80
+    lines: 24
+
+  opacity: 0.7
+
+font:
+  normal:
+    family: monospace
+    style: Regular
+    size: 12
+
+  bold:
+    family: monospace
+    style: Bold
+
+  italic:
+    family: monospace
+    style: Italic
+
+  bold_italic:
+    family: monospace
+    style: Bold Italic
+
+import:
+  - ~/.config/alacritty/themes/solarized_dark.yaml

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+URGENT_VALUE=20
+
+updates_arch=$(checkupdates | wc -l )
+
+updates_aur=$(trizen -Su --aur --quiet | wc -l)
+
+updates=$(("$updates_arch" + "$updates_aur"))
+
+if [ "$updates" -gt 0 ]; then
+  echo "" "PMN $updates_arch | AUR $updates_aur"
+else
+    echo ""
+fi
+
+case $BLOCK_BUTTON in
+    1)dunstify -t 1675 -h string:fgcolor:#FFFFFF -h string:bgcolor:#115F66 " Packages Update";
+      alacritty -e trizen -Syu;;
+
+esac
+
+ if [[ "${updates_arch}" -gt "${URGENT_VALUE}" ]]; then
+    exit 33
+ fi

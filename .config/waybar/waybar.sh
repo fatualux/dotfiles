@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
 run_waybar() {
-    waybar -c ~/.config/sway/waybar-enabled/config -s ~/.config/sway/waybar-enabled/style.css
+    waybar -c ~/.config/waybar/config  -s ~/.config/waybar/style.css
 }
 
 restart_waybar() {
     pid=$(pgrep waybar)
-    [ ! -z $pid ] && kill $pid
-    run_waybar
+    for i in $pid; do
+        kill $i
+    done
+    if [ -z "$pid" ]; then
+        run_waybar
+    fi
 }
 
 restart_waybar

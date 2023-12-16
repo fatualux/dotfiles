@@ -27,3 +27,5 @@ input type:touchpad {
 }
 
 input type:keyboard xkb_layout "it"
+input type:keyboard xkb_capslock disabled
+input type:keyboard xkb_numlock enabled

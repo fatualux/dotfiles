@@ -114,3 +114,12 @@ elif [ -f /etc/bash_completion ]; then
 . /etc/bash_completion
 fi
 fi
+
+# Set QT theme
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+#GTK theme apply
+gsettings set org.gnome.desktop.interface cursor-theme Dimension
+gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
+gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
+gsettings set org.gnome.desktop.interface font-name "Xolonium 11"

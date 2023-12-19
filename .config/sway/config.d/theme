@@ -1,5 +1,7 @@
 include catppuccin-mocha
 # Apply gtk theming
+set $gnome-schema org.gnome.desktop.interface
+
 exec_always {
     gsettings set $gnome-schema gtk-theme 'Material-Black-Lime-LA'
     gsettings set $gnome-schema icon-theme 'oomox-fz'
@@ -25,11 +27,11 @@ for_window [shell="xdg_shell"] title_format "%title (%app_id)"
 for_window [shell="x_wayland"] title_format "%class - %title"
 
 # Set gaps for windows with rounded corners
-for_window [class="^.*"] border pixel 2
-for_window [class="^.*"] border radius 30
+for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border radius 0
 
-for_window [app_id="^.*"] border pixel 2
-for_window [app_id="^.*"] border radius 30
+for_window [app_id="^.*"] border pixel 3
+for_window [app_id="^.*"] border radius 0
 
 set $opacity 0.9
 
@@ -54,5 +56,6 @@ bar {
 }
 
 # Set the background image
-output * bg #000000 solid_color
-output * bg ../background.jpg fill
+output * bg ../background.jpg fill #000000
+
+seat seat0 xcursor_theme "Dimension" 10

@@ -9,9 +9,6 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd $DISPLAY $WAYLAND_DISPLAY $SWAYSOCK
 
-# Sway Fader
-# exec python3 ~/.config/sway/scripts/swayfader.py
-
 # Autotiling
 exec autotiling
 
@@ -21,9 +18,8 @@ exec ~/.config/sway/scripts/light.sh
 # nm-applet
 exec nm-applet --indicator
 
-# Clipman
-exec clipman restore
-exec wl-paste -t text --watch clipman store
+#Clipman
+exec wl-paste -t text --watch clipman store --no-persist
 
 # Gnome Keyring
 exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
@@ -42,3 +38,9 @@ exec_always swayrd
 
 #pipewire-media-session
 exec pipewire-media-session &
+
+#GTK theme apply
+exec gsettings set org.gnome.desktop.interface cursor-theme Dimension
+exec gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
+exec gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
+exec gsettings set org.gnome.desktop.interface font-name "Xolonium 11"

@@ -105,9 +105,9 @@ bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
 bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && alacritty -e joshuto
 bindsym $alt+Control+w exec alacritty -e sh .scripts/ytStream
 bindsym $alt+Control+m exec alacritty -e sh "Thunderbird" && thunderbird
-bindsym $alt+Control+x exec $HOME/.scripts/rusteddrawer
-bindsym $alt+Control+y exec sh $HOME/.scripts/translate
-bindsym $alt+Control+u exec alacritty -e comfyUI
+bindsym $alt+Control+x exec alacritty -e sh $HOME/.scripts/bash/launcher
+bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate
+bindsym $alt+Control+u exec alacritty -e sh $HOME/.scripts/bash/comfyUI
 
 # XF86 Fn keys
 

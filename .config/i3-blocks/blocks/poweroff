@@ -6,9 +6,9 @@ BG_COLOR="${BG_COLOR:-#90ee90}"           # Background color
 HLFG_COLOR="${HLFG_COLOR:-#111111}"       # Highlighted foreground color
 HLBG_COLOR="${HLBG_COLOR:-#90ee90}"       # Highlighted background color
 BORDER_COLOR="${BORDER_COLOR:-#222222}"   # Border color
-TITLE="${TITLE:-Menu}"                    # Zenity dialog title
-TEXT="${TEXT:-Action:}"                   # Zenity dialog text
-OPTIONS=(${OPTIONS:---column= --hide-header})  # Zenity dialog options
+TITLE="${TITLE:-Menu}"                    # Yad dialog title
+TEXT="${TEXT:-Action:}"                   # Yad dialog text
+OPTIONS=(${OPTIONS:---column= --hide-header})  # Yad dialog options
 enable_confirmation=${ENABLE_CONFIRMATIONS:-false}  # Enable user confirmation
 
 # Function to check if a command exists
@@ -36,17 +36,17 @@ menu_nrows=${#menu[@]}
 # Menu entries that require confirmation
 menu_confirm="Shutdown Reboot Hibernate Suspend Halt Logout"
 
-# Function to ask for user confirmation using Zenity
+# Function to ask for user confirmation using Yad
 ask_confirmation() {
-  zenity --question --text "Are you sure you want to ${selection,,}?"
+  yad --question --text "Are you sure you want to ${selection,,}?"
   confirmed=$?
   if [ "${confirmed}" == 0 ]; then
     i3-msg -q "exec ${menu[${selection}]}"
   fi
 }
 
-# Set Zenity as the menu launcher
-launcher_exe="zenity"
+# Set Yad as the menu launcher
+launcher_exe="yad"
 launcher_options=(--list --title="${TITLE}" --text="${TEXT}" "${OPTIONS[@]}")
 
 launcher=(${launcher_exe} "${launcher_options[@]}")

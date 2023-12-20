@@ -20,6 +20,9 @@ restart_waybar() {
     if [ -z "$pid" ]; then
         run_waybar
     fi
+  else
+    run_waybar
+  fi
 }
 
 restart_waybar

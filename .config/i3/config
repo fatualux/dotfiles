@@ -14,10 +14,6 @@ client.urgent               #900000 #900000 #900000 #900000   #900000
 client.placeholder          #000000 #0c0c0c #339977 #000000   #0c0c0c
 client.background           #000000
 
-floating_modifier $mod
-new_float  pixel 5
-
-
 # DMENU keybinds
 bindsym $mod+Return exec --no-startup-id dmenu_run -i -l 9 -p "" -nb "#010101" -nf "#33FF77" -sb "#115131" -sf "#ffffff" -fn "Xolonium 13"
 
@@ -211,6 +207,7 @@ exec_always --no-startup-id "picom -b --experimental-backend"
 exec_always --no-startup-id "i3-autolayout autolayout"
 exec_always --no-startup-id telegram-desktop
 exec_always --no-startup-id udiskie -2 -s &
+exec_always dwagent_monitor
 
 # Windows rules
 for_window [class="Pavucontrol"] floating enable

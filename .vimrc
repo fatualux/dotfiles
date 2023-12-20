@@ -47,7 +47,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'TabbyML/vim-tabby'
+Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 let g:indentLine_setColors = 0
@@ -87,8 +87,6 @@ noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-
-
 
 " When the +eval feature is missing, the set command above will be skipped.
 " Use a trick to reset compatible only when the +eval feature is missing.
@@ -404,7 +402,3 @@ endfunction
 
 nnoremap <SPACE>r :silent call PasteReg('p')<CR>
 nnoremap <SPACE>R :silent call PasteReg('P')<CR>
-
-" Wayland shortcuts
-autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
-nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p

@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # add user-installed apps to my PATH
-export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$HOME/Apps"
+export PATH="$PATH:$HOME/.scripts/bash"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 

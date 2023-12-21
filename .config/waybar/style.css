@@ -11,13 +11,17 @@
 @define-color accent4 #bb9af7;
 @define-color accent5 #7da6ff;
 @define-color accent6 #0db9d7;
+@define-color accent7 #b4befe;
+@define-color accent8 #eba0ac;
+@define-color accent9 #aaffe4;
+@define-color accent10 #0303CE;
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     border: none;
     font-family: "Xolonium";
     /* Recommended font sizes: 720p: ~14px, 1080p: ~18px */
-    font-size: 12px;
+    font-size: 11px;
 }
 
 window#waybar {
@@ -185,10 +189,6 @@ label:focus {
     min-width: 100px;
 }
 
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
 #custom-media.custom-vlc {
     background-color: #ffa000;
 }
@@ -210,10 +210,6 @@ label:focus {
     border-radius: 4px;
 }
 
-#mpd {
-    color: #d1e231;
-}
-
 #custom-language {
     color: @accent5;
     min-width: 16px;
@@ -222,7 +218,7 @@ label:focus {
 #custom-separator {
     color: #606060;
     margin: 0 1px;
-    padding-bottom: 5px;
+    padding: 5px 5px 5px 5px;
 }
 
 #custom-wmname {

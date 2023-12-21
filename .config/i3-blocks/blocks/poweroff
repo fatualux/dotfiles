@@ -27,7 +27,7 @@ menu=(
   [Shutdown]="systemctl poweroff"
   [Reboot]="systemctl reboot"
   [Hibernate]="systemctl hibernate"
-  [Logout]="swaymsg exit"
+  [Logout]="i3-msg exit"
 )
 
 # Number of menu items

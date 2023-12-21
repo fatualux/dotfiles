@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom/pacman", "bluetooth", "network", "netspeed", "tray", "clock", "custom/power"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -129,11 +129,11 @@
         "on-click": "pavucontrol"
     },
     "custom/pacman": {
-        "format": "{}  ",
+        "format": "{}",
         "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
+        "exec": "echo '' $(checkupdates | wc -l)",       // # of updates
         "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "alacritty -e trizen -Syu | wc -l;  pkill -SIGRTMIN+8 waybar", // update system,
+        "on-click": "dunstify 'Packages Update' && alacritty -e trizen -Syu | wc -l;  pkill -SIGRTMIN+8 waybar", // update system,
         "signal": 8
     },
     "bluetooth": {

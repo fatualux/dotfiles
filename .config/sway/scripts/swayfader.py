@@ -1,48 +1,44 @@
-#!/usr/bin/python3
-
 from i3ipc import Connection, Event
 from threading import Thread
 from time import sleep
-from os import getenv
 
-# delay per frame
-FRAME_T = float(getenv("SWAYFADER_FRAME_T", 0.01))
+
+FRAME_T = 0.01  # time taken between each frame of fade
 
 # transparency values
-CON_AC = float(getenv("SWAYFADER_CON_AC", 1))  # active window
-CON_INAC = float(getenv("SWAYFADER_CON_INAC", 0.8))  # inactive window
-FLOAT_AC = float(getenv("SWAYFADER_FLOAT_AC", 1))  # active floating window
-FLOAT_INAC = float(getenv("SWAYFADER_FLOAT_INAC", 0.95))  # inactive floating window
-BOT_INAC = float(getenv("SWAYFADER_BOT_INAC", 0.9))  # bottom window
+CON_AC     = 1     # active window
+CON_INAC   = 0.5   # inactive window
+FLOAT_AC   = 1     # active floating window
+FLOAT_INAC = 0.5  # inactive floating window
+BOT_INAC   = 0.9   # bottom window
 
 
 # fade durations
-FADE_TIME = float(getenv("SWAYFADER_FADE_TIME", 0.2))
-ALT_FADE_TIME = float(getenv("SWAYFADER_ALT_FADE_TIME", 0.1))
+FADE_TIME      = 0.2
+ALT_FADE_TIME  = 0.1
 
-CON_OUT = float(getenv("SWAYFADER_CON_OUT", FADE_TIME))  # window fading out
-CON_IN = float(getenv("SWAYFADER_CON_IN", FADE_TIME - 0.05))  # window fading in
-FLOAT_OUT = float(getenv("SWAYFADER_FLOAT_OUT", ALT_FADE_TIME))  # floating window fading out
-FLOAT_IN = float(getenv("SWAYFADER_FLOAT_IN", ALT_FADE_TIME))  # floating window fading in
-BOT_OUT = float(getenv("SWAYFADER_BOT_OUT", ALT_FADE_TIME))  # bottom window fading out
-BOT_IN = float(getenv("SWAYFADER_BOT_IN", ALT_FADE_TIME))  # bottom window fading in
-BOT_SWITCH_IN = float(getenv("SWAYFADER_BOT_SWITCH_IN", FADE_TIME))  # window becoming bottom window
-BOT_SWITCH_OUT = float(getenv("SWAYFADER_BOT_SWITCH_OUT", FADE_TIME))  # bottom window becoming window
-FLOAT_BOT_OUT = float(getenv("SWAYFADER_FLOAT_BOT_OUT", FADE_TIME))  # floating window fading out from bottom
-FLOAT_BOT_IN = float(getenv("SWAYFADER_FLOAT_BOT_IN", FADE_TIME))  # floating window fading in from bottom
+CON_OUT        = FADE_TIME      # window fading out
+CON_IN         = 0.15           # window fading in
+FLOAT_OUT      = ALT_FADE_TIME  # floating window fading out
+FLOAT_IN       = ALT_FADE_TIME  # floating window fading in
+BOT_OUT        = ALT_FADE_TIME  # bottom window fading out
+BOT_IN         = ALT_FADE_TIME  # bottom window fading in
+BOT_SWITCH_IN  = FADE_TIME      # window becoming bottom window
+BOT_SWITCH_OUT = FADE_TIME      # bottom window becoming window
+FLOAT_BOT_OUT  = FADE_TIME      # floating window fading out from bottom
+FLOAT_BOT_IN   = FADE_TIME      # floating window fading in from bottom
 
 
 class Fader:
     def __init__(self):
         self.floating_windows = []
-        self.fader_running = False
-        self.fade_queue = []
-        self.fade_data = {}
-        self.bottom_win = None
-        self.old_win = None
-        self.active_win = None
+        self.fader_running    = False
+        self.fade_queue       = []
+        self.fade_data        = {}
+        self.bottom_win       = None
+        self.old_win          = None
+        self.active_win       = None
 
-    def start(self):
         ipc = Connection()
         ipc.on(Event.WINDOW_FOCUS,    self.on_window_focus)
         ipc.on(Event.WINDOW_NEW,      self.on_window_new)
@@ -93,8 +89,6 @@ class Fader:
 
     def fader(self):
         while self.fade_queue:
-            # TODO: iterate list reversed instead of copying each time
-            # i cant do it atm because wont be able to test (not using sway)
             for win_id in self.fade_queue.copy():
                 try:
                     f = self.fade_data[win_id]
@@ -203,7 +197,7 @@ class Fader:
         if c_id not in self.floating_windows:
             self.floating_windows.append(c_id)
 
-            if self.active_win.id != c_id:
+            if self.active_win.id != e.container.id:
                 change_opacity(e.container, FLOAT_INAC)
 
             else:
@@ -215,7 +209,7 @@ class Fader:
 
         else:
             self.floating_windows.remove(c_id)
-            if self.active_win.id != c_id:
+            if self.active_win.id != e.container.id:
                 change_opacity(e.container, CON_INAC)
 
             else:
@@ -231,5 +225,5 @@ def change_opacity(win, trans):
 
 
 if __name__ == "__main__":
-    f = Fader()
-    f.start()
+    Fader()
+

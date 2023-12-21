@@ -1,22 +1,13 @@
 # Auth with polkit-gnome:
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Reset waybar
-exec_always killall waybar
-
-# Desktop notifications
-exec dunst &
-
 # Pipewire
 exec pipewire
 
 # GTK3 applications take a long time to start
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-
-# Sway Fader
-exec python3 ~/.config/sway/scripts/swayfader.py
+     dbus-update-activation-environment --systemd $DISPLAY $WAYLAND_DISPLAY $SWAYSOCK
 
 # Autotiling
 exec autotiling
@@ -25,7 +16,10 @@ exec autotiling
 exec ~/.config/sway/scripts/light.sh
 
 # nm-applet
-exec nm-applet --indicator &
+exec nm-applet --indicator
+
+#Clipman
+exec wl-paste -t text --watch clipman store --no-persist
 
 # Gnome Keyring
 exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
@@ -36,17 +30,17 @@ exec libinput-gestures-setup start
 # Xdg DEsktop Portal
 exec /usr/libexec/xdg-desktop-portal
 
-# Cheatsheet
-exec micro ~/.config/sway/cheatsheet
-
-# MPD
-exec mpd &
+# Tracker daemon for gnome apps
+exec tracker daemon -s
 
 # swayrd
 exec_always swayrd
 
-# media-session
-exec_always pipewire-media-session start &
+#pipewire-media-session
+exec pipewire-media-session &
 
-# unset display
-exec_always unset DISPLAY &
+#GTK theme apply
+exec gsettings set org.gnome.desktop.interface cursor-theme Dimension
+exec gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
+exec gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
+exec gsettings set org.gnome.desktop.interface font-name "Xolonium 11"

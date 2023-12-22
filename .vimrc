@@ -338,7 +338,7 @@ function! AutoGit()
   let file_name = expand('%')
   let choice = inputdialog('Changes detected in ' . file_name . '. Do you want to add the file to the repository? ')
   if choice == 'y' || choice == 'Y' || choice == 'yes' || choice == 'Yes' || choice == 'YES'
-    execute ':!git add %'
+    execute ':!git pull && git add %'
     let additional_comments = inputdialog('Add additional comments (leave empty to skip): ')
     if !empty(additional_comments)
       let commit_message = additional_comments

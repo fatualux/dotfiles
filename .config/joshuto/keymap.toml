@@ -121,7 +121,7 @@ keymap = [
  { keys = [ "g", "d" ],  command = "cd ~/Downloads" },
  { keys = [ "g", "e" ],  command = "cd ~/Documents/Github" },
  { keys = [ "g", "h" ],  command = "cd ~/" },
- { keys = [ "g", "p" ],  command = "cd /Documents/Projects" },
+ { keys = [ "g", "p" ],  command = "cd ~/Documents/Projects" },
  { keys = [ "?" ],  command = "help" }
 ]
 

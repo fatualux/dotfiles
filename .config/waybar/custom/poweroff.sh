@@ -3,18 +3,9 @@
 # Configuration section: Customize these variables as needed
 TITLE="${TITLE:-Menu}"                    # Yad dialog title
 TEXT="${TEXT:-Action:}"                   # Yad dialog text
-OPTIONS=(${OPTIONS:---column= --hide-header})  # Yad dialog options
+WIDTH=${WIDTH:-300}                       # Yad dialog width
+HEIGHT=${HEIGHT:-200}                     # Yad dialog height
 enable_confirmation=${ENABLE_CONFIRMATIONS:-false}  # Enable user confirmation
-
-# Function to check if a command exists
-command_exists() {
-  command -v "$1" &> /dev/null 2>&1
-}
-
-# Check if systemctl command is available, required for some operations
-if ! command_exists systemctl; then
-  exit 1
-fi
 
 # Associative array to define menu items and their corresponding commands
 declare -A menu
@@ -25,9 +16,6 @@ menu=(
   [Logout]="swaymsg exit"
 )
 
-# Number of menu items
-menu_nrows=${#menu[@]}
-
 # Menu entries that require confirmation
 menu_confirm="Shutdown Reboot Hibernate Suspend Halt Logout"
 
@@ -35,26 +23,29 @@ menu_confirm="Shutdown Reboot Hibernate Suspend Halt Logout"
 ask_confirmation() {
   yad --question --text "Are you sure you want to ${selection,,}?"
   confirmed=$?
+  echo "Confirmation status: ${confirmed}"
   if [ "${confirmed}" == 0 ]; then
-    i3-msg -q "exec ${menu[${selection}]}"
+    command="${menu[${selection%%|}]}"  # Remove trailing "|"
+    echo "Executing: ${command}"
+    ${command}
+  else
+    echo "User canceled."
   fi
 }
 
-# Set Yad as the menu launcher
-launcher_exe="yad"
-launcher_options=(--list --title="${TITLE}" --text="${TEXT}" "${OPTIONS[@]}")
-
-launcher=(${launcher_exe} "${launcher_options[@]}")
-
 # Display the menu and get the user's selection
-selection="$(printf '%s\n' "${!menu[@]}" | sort | "${launcher[@]}")"
+selection=$(for item in "${!menu[@]}"; do echo "$item"; done | yad --list --title="${TITLE}" --text="${TEXT}" --width=${WIDTH} --height=${HEIGHT} --column=Options --height=200 --width=300)
 
 # Process the user's selection
-if [[ $? -eq 0 && ! -z ${selection} ]]; then
+echo "Selected option: ${selection}"
+if [ ! -z "${selection}" ]; then
   if [[ "${enable_confirmation}" = true && \
         ${menu_confirm} =~ (^|[[:space:]])"${selection}"($|[[:space:]]) ]]; then
+    echo "Confirmation required."
     ask_confirmation
   else
-    i3-msg -q "exec ${menu[${selection}]}"
+    command="${menu[${selection%%|}]}"  # Remove trailing "|"
+    echo "Executing: ${command}"
+    ${command}
   fi
 fi

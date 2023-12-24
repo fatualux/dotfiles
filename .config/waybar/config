@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "custom/gpu", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -57,28 +57,28 @@
         "spacing": 10
     },
     "clock": {
-        // "timezone": "America/New_York",
+        // "timezone": "Europe/Rome",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "  {usage}%",
         "on-click": "alacritty -e btop"
     },
     "memory": {
-        "format": "{}% "
+        "format": "  {}%"
     },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
+        // "format-critical": " {icon} {temperatureC}°C",
+        "format": " {icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
+        "format": " {icon} {percent}%",
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
@@ -87,11 +87,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": " {icon} {capacity}% ",
         "interval": 1,
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-alt": " {icon} {time}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -101,7 +101,7 @@
     },
     "network": {
         "interface": "wlan0",
-        "format-wifi": " {essid} ({signalStrength}%) -   {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-wifi": "  {essid} ({signalStrength}%) -   {bandwidthDownBytes}  {bandwidthUpBytes}",
         "interval": 5,
         "format-ethernet": "  {ipaddr}/{cidr} ",
         "tooltip-format": "  {ifname} via {gwaddr} ",
@@ -137,7 +137,9 @@
         "signal": 8
     },
     "bluetooth": {
-        "format": "",
+        "format-on": " - ON",
+        "format-disabled": " - OFF",
+        "interval": 3,
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
@@ -145,7 +147,15 @@
     },
     "custom/power": {
       "format": "⏻",
-      "on-click": "~/.config/i3-blocks/blocks/poweroff",
+      "on-click": "$HOME/.config/waybar/custom/poweroff.sh",
       "tooltip": false
+    },
+    "custom/gpu": {
+      "exec": "nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits && echo 'Mb'",
+      "format": "{icon}  GPU: {}",
+      "format-icons": ["", "", "", "", "", "", "", ""],
+      "return-type": "",
+      "on-click": "nvidia-settings",
+      "interval": 1
     },
 }

@@ -183,16 +183,6 @@ label:focus {
     color: @accent2;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
 #temperature {
     color: @accent6;
 }
@@ -206,7 +196,7 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #343434;
+    background-color: #343439;
     border-radius: 4px;
 }
 
@@ -257,4 +247,25 @@ label:focus {
 
 #scratchpad {
     background: rgba(0, 0, 0, 0.2);
+}
+
+@keyframes blink-update {
+    to {
+        background-color: dodgerblue;
+    }
+}
+
+#custom-pacman {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-pacman.pending-updates {
+    animation-name: blink-update;
+    animation-duration: 3s;
+}
+
+#custom-gpu {
+    color: #f1fa8c;
 }

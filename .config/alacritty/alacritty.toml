@@ -1,0 +1,24 @@
+import = ["/home/fz/.config/alacritty/themes/solarized_dark.toml"]
+
+[font.bold]
+family = "monospace"
+style = "Bold"
+
+[font.bold_italic]
+family = "monospace"
+style = "Bold Italic"
+
+[font.italic]
+family = "monospace"
+style = "Italic"
+
+[font.normal]
+family = "monospace"
+style = "Regular"
+
+[window]
+opacity = 0.7
+
+[window.dimensions]
+columns = 80
+lines = 24

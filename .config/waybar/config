@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "custom/gpu", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "disk", "custom/gpu", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -151,11 +151,16 @@
       "tooltip": false
     },
     "custom/gpu": {
-      "exec": "DEVICE=$(nvidia-smi --query-gpu=name --format=csv,noheader,nounits) && PERCENTAGE=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{printf(\"%d%%\", $1)}') && TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits | awk '{printf(\"%d°C\", $1)}') && echo $DEVICE - $PERCENTAGE - $TEMP",
-      "format-icons": ["", ""],
-      "format": "{icon} {}",
-      "return-type": "",
-      "on-click": "nvidia-settings",
-      "interval": 1
-    },
+  "exec": "$HOME/.config/waybar/custom/gpu.sh",
+  "format-icons": ["", ""],
+  "format": "{icon} {}",
+  "return-type": "",
+  "on-click": "nvidia-settings",
+  "interval": 1
+},
+  "disk": {
+  "interval": 30,
+  "format": "  {percentage_free}%",
+  "on-click": "$HOME/.config/waybar/custom/disk.sh &",
+  },
 }

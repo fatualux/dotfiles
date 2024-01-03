@@ -47,7 +47,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'TabbyML/vim-tabby'
 call plug#end()
 
 let g:indentLine_setColors = 0

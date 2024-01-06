@@ -257,3 +257,9 @@ bindsym $alt+Control+s exec peek
 
 ### Autolayout
 exec_always autotiling -w 1 3 5 7 9
+
+#GTK theme apply
+exec gsettings set org.gnome.desktop.interface cursor-theme "Hacked-aio"
+exec gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
+exec gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
+exec gsettings set org.gnome.desktop.interface font-name "Xolonium 11"

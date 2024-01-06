@@ -1,8 +1,32 @@
 #!/bin/bash
 
+# Startup applications
+
+# sway if on tty
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec sway --unsupported-gpu
+fi
+
+#COLORS
+RESTORE='\033[0m'
+RED='\033[00;31m'
+GREEN='\033[00;32m'
+YELLOW='\033[00;33m'
+BLUE='\033[00;34m'
+PURPLE='\033[00;35m'
+CYAN='\033[00;36m'
+LIGHTGRAY='\033[00;37m'
+LRED='\033[01;31m'
+LGREEN='\033[01;32m'
+LYELLOW='\033[01;33m'
+LBLUE='\033[01;34m'
+LPURPLE='\033[01;35m'
+LCYAN='\033[01;36m'
+WHITE='\033[01;37m'
+
 # add user-installed apps to my PATH
-export PATH="$PATH:$HOME/.scripts"
-export PATH="$PATH:$HOME/Apps"
+export PATH="$PATH:$HOME/.scripts/bash"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -104,13 +128,4 @@ alias powertop="sudo powertop --auto-tune && sudo powertop"
 alias sway="sway --unsupported-gpu"
 alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
 alias wget="aria2c"
-alias ghlicense="source $HOME/.virtualenv/GH-license/bin/activate"
-
-# Option for bash-completion
-if ! shopt -oq posix; then
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-. /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-. /etc/bash_completion
-fi
-fi
+alias mobac="rm $HOME/.mobac/mobac-profile.xml && mobac"

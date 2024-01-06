@@ -2,10 +2,18 @@
 
 # Startup applications
 
-# sway if on tty
+# sway if on tty1
 
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; thena
+  echo "Starting Sway..."
   exec sway --unsupported-gpu
+fi
+
+# xorg if on tty2
+
+if [ "${XDG_VTNR}" -eq 2 ]; then
+  echo "Starting Xorg..."
+  exec startx
 fi
 
 #COLORS

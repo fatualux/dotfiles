@@ -18,7 +18,7 @@ exec ~/.config/sway/scripts/light.sh
 # nm-applet
 exec nm-applet --indicator
 
-#Clipman
+# Clipman
 exec wl-paste -t text --watch clipman store --no-persist
 
 # Gnome Keyring
@@ -30,17 +30,17 @@ exec libinput-gestures-setup start
 # Xdg DEsktop Portal
 exec /usr/libexec/xdg-desktop-portal
 
-# Tracker daemon for gnome apps
-exec tracker daemon -s
+# Tracker daemon
+exec_always tracker --no-startup-notification --no-notify
 
-# swayrd
+# SwayRD
 exec_always swayrd
 
-#pipewire-media-session
-exec pipewire-media-session &
+# PipeWire for media playback
+exec pipewire-media-session
 
-#GTK theme apply
-exec gsettings set org.gnome.desktop.interface cursor-theme Dimension
-exec gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
-exec gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
-exec gsettings set org.gnome.desktop.interface font-name "Xolonium 11"
+# Combine multiple commands into a single exec command
+exec gsettings set org.gnome.desktop.background show-desktop-icons false --user
+
+# Use a consistent naming convention for your exec commands
+exec_always gsettings_set_org_gnome_desktop_background show-desktop-icons false --user

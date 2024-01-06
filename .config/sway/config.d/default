@@ -226,7 +226,7 @@ exec --no-startup-id gnome-settings-daemon
 
 # Screenshot keybinds
 bindsym $alt+Shift+p exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && dunstify -r 222 "SCREENSHOT AQUIRED."
-bindsym --release $alt+P exec grim -g "$(slurp)" | wl-copy && dunstify -r 222 "Region captured."
+bindsym $alt+p exec grim -g "$(slurp)" - | wl-copy && dunstify -r 222 "Region captured."
 bindsym $alt+Control+p exec grim - | wl-copy && dunstify -r 222 "SCREENSHOT AQUIRED."
 
  # Screenrecord keybinds

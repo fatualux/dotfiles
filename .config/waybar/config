@@ -66,7 +66,8 @@
         "on-click": "alacritty -e btop"
     },
     "memory": {
-        "format": "  {}%"
+        "format": "  {}%",
+        "on-click": "cpupower-gui"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -161,6 +162,6 @@
   "disk": {
   "interval": 30,
   "format": "  {percentage_free}%",
-  "on-click": "$HOME/.config/waybar/custom/disk.sh &",
+  "on-click": "$HOME/.config/waybar/custom/disk.sh > /tmp/script_log.txt 2>&1",
   },
 }

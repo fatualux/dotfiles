@@ -186,6 +186,10 @@ html.app_list = [
  { command = "firefox" },
  { command = "dragon-drop" }]
 
+htm.app_list = [
+ { command = "firefox" },
+ { command = "dragon-drop" }]
+
 pdf.inherit = "reader_default"
 
 kra.app_list = [

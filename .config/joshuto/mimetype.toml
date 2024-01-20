@@ -26,7 +26,6 @@ text_default = [
  { command = "code", fork = true, silent = true },
  { command = "bat", args = [ "--paging=always" ] },
  { command = "sh" },
- { command = "firefox" },
  { command = "dragon-drop", fork = true, silent = true },
 ]
 

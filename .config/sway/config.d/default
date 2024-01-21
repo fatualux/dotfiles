@@ -1,6 +1,8 @@
 # SET $mod key on SUPER
 set $alt Mod1
 set $mod Mod4
+set $EDITOR vim
+set $TERMINAL alacritty
 
 # BEMENU keybinds
 set $uifont "Xolonium 12"
@@ -102,12 +104,11 @@ bindsym $alt+Control+n exec dunstify -r 333 "TELEGRAM" && telegram-desktop
 bindsym $alt+Control+t exec dunstify -r 333 "SHELL" && alacritty
 bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
 bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
-bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && alacritty -e joshuto
-bindsym $alt+Control+w exec alacritty -e sh .scripts/ytStream.sh
-bindsym $alt+Control+m exec alacritty -e sh "Thunderbird" && thunderbird
-bindsym $alt+Control+x exec alacritty -e sh $HOME/.scripts/bash/launcher.sh
+bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && export EDITOR=vim && foot -e joshuto
+bindsym $alt+Control+w exec foot -e sh $HOME/.scripts/bash/yt_stream.sh
+bindsym $alt+Control+x exec foot -e sh $HOME/.scripts/bash/launcher.sh
 bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate.sh
-bindsym $alt+Control+u exec alacritty -e sh $HOME/.scripts/bash/comfyUI.sh
+bindsym $alt+Control+u exec foot -e sh $HOME/.scripts/bash/comfyUI.sh
 
 # XF86 Fn keys
 
@@ -220,9 +221,6 @@ for_window [class=".*"] opacity 0.85
 
 # Set transparency for preferred terminal emulator
 for_window [class="Alacritty"] opacity 0.9
-
-# Make GTK apps look better
-exec --no-startup-id gnome-settings-daemon
 
 # Screenshot keybinds
 bindsym $alt+Shift+p exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && dunstify -r 222 "SCREENSHOT AQUIRED."

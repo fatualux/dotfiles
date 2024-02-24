@@ -2,19 +2,26 @@
 
 # Startup applications
 
-# sway if on tty1
+# Sway if on tty1
 
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; thena
-  echo "Starting Sway..."
-  exec sway --unsupported-gpu
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    echo ""
+    echo "Starting Sway..."
+    echo ""
+    exec sway --unsupported-gpu
 fi
 
-# xorg if on tty2
-
+# Xorg if on tty2
 if [ "${XDG_VTNR}" -eq 2 ]; then
-  echo "Starting Xorg..."
-  exec startx
+    echo ""
+    echo "Starting Xorg..."
+    echo ""
+    exec startx
 fi
+
+# Set text editor to vim
+export VISUAL=vim
+export EDITOR=vim
 
 #COLORS
 RESTORE='\033[0m'
@@ -35,6 +42,7 @@ WHITE='\033[01;37m'
 
 # add user-installed apps to my PATH
 export PATH="$PATH:$HOME/.scripts/bash"
+export PATH="$PATH: /usr/bin/"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.cargo/bin"
 
@@ -137,3 +145,4 @@ alias sway="sway --unsupported-gpu"
 alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
 alias wget="aria2c"
 alias mobac="rm $HOME/.mobac/mobac-profile.xml && mobac"
+alias gparted="sudo -E gparted"

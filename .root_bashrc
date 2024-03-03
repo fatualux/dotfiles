@@ -38,12 +38,6 @@ export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
 # history -c wipes the buffer so no duplication occurs
 # history -r re-reads the $HISTFILE, appending to the now blank buffer
 
-# stores the first occurrence of each line it encounters.
-# tac reverses it, and then reverses it back so that it can be saved with
-# the most recent commands still most recent in the History
-tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile  && tac /tmp/tmpfile > "$HISTFILE"
-rm /tmp/tmpfile
-
 export HISTFILESIZE=5000
 export HISTSIZE=1000
 
@@ -75,7 +69,7 @@ shopt -s cmdhist         # try to save all lines of a multiple-line command in t
 # INITIAL SCREEN
 
 echo -e ""
-echo -ne "$RED >>> WARNING! YOU ARE ROOT! <<<"
+echo -ne "$YELLOW >>> WARNING! YOU ARE ROOT! <<<"
 echo -e ""
 echo -e ""
 

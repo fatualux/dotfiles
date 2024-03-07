@@ -408,3 +408,8 @@ nnoremap <SPACE>R :silent call PasteReg('P')<CR>
 
 " Wayland shortcuts
 let g:wayland_clipboard_copy_args = ['--primary', '--paste-once']
+
+" Mappings for markdown-preview
+nmap <C-m> <Plug>MarkdownPreview
+nmap <C-l> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle

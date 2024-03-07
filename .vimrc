@@ -47,6 +47,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'iamcco/markdown-preview.nvim'
+Plug 'jasonccox/vim-wayland-clipboard'
 call plug#end()
 
 let g:indentLine_setColors = 0
@@ -405,5 +407,4 @@ nnoremap <SPACE>r :silent call PasteReg('p')<CR>
 nnoremap <SPACE>R :silent call PasteReg('P')<CR>
 
 " Wayland shortcuts
-autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
-nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
+let g:wayland_clipboard_copy_args = ['--primary', '--paste-once']

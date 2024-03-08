@@ -47,8 +47,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'iamcco/markdown-preview.nvim'
-Plug 'jasonccox/vim-wayland-clipboard'
+Plug 'JamshedVesuna/vim-markdown-preview'
 call plug#end()
 
 let g:indentLine_setColors = 0
@@ -83,13 +82,10 @@ map Q gq
 inoremap <C-U> <C-G>u<C-U>
 
 " Remap for system clipboard
-
 noremap <Leader>y "*y
 noremap <Leader>p "*p
 noremap <Leader>Y "+y
 noremap <Leader>P "+p
-
-
 
 " When the +eval feature is missing, the set command above will be skipped.
 " Use a trick to reset compatible only when the +eval feature is missing.
@@ -103,8 +99,6 @@ set backspace=indent,eol,start
 set history=200         " keep 200 lines of command line history
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
-
-
 set ttimeout            " time out for key codes
 set ttimeoutlen=100     " wait up to 100ms after Esc for special key
 
@@ -220,16 +214,13 @@ map <C-w> :tabclose <CR>
 map <Tab> :tabnext <CR>
 map <C-q> :wq <CR>
 map <C-d> :NextColorScheme <CR>
-" copy and paste system clipboard
-nnoremap <y> "*yy (might be because I'm in visual mode here?)
-nnoremap <p> "*p
 " enable/disable CodeiumCompletion
 map <C-x> :Codeium Enable <CR>
 map <C-z> :Codeium Disable <CR>
 " Control+a to select all.
 map <C-a> <esc>ggVG<CR>
 
-"bash completion
+" Bash completion
 function MakeCommandCompletion(ArgLead, CmdLine, CursorPos)
     let l:words = split(a:CmdLine)
     let l:words[0] = 'make'
@@ -253,7 +244,6 @@ autocmd BufEnter * :syntax sync fromstart
 
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
-"
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.xml,*.php'
 
 " filenames like *.xml, *.xhtml, ...
@@ -268,28 +258,22 @@ let g:closetag_filetypes = 'html,xhtml,phtml,xml,php'
 
 " filetypes like xml, xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
-"
 let g:closetag_xhtml_filetypes = 'xhtml,jsx'
 
 " integer value [0|1]
 " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
 let g:closetag_emptyTags_caseSensitive = 1
 
 " Shortcut for closing tags, default is '>'
-"
 let g:closetag_shortcut = '>'
 
 " Add > at current position without closing the current tag, default is ''
-"
 let g:closetag_close_shortcut = '<leader>>'
 
 " Setting folding method to 'indent'
-
 :setlocal foldmethod=manual
 
 " Map shortcut to toggle fold/unfold
-
 map f za
 map F zf
 map T :term
@@ -297,7 +281,6 @@ map T :term
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " fuzzy finder
-
 fu! Fuzzy()
     enew
     read !find -type f
@@ -306,7 +289,6 @@ fu! Fuzzy()
 endf
 
 " Settings for pymode
-
 let g:pymode = 1
 let g:pymode_warnings = 1
 let g:pymode_trim_whitespaces = 1
@@ -334,7 +316,6 @@ augroup END
 set rulerformat=%32(%=%{b:git_current_branch}%=%8l,%-6(%c%V%)%=%4p%%%)
 
 " Autodetect file changes when written and git commit
-
 function! AutoGit()
   let file_name = expand('%')
   let choice = inputdialog('Changes detected in ' . file_name . '. Do you want to add the file to the repository? ')
@@ -383,7 +364,6 @@ let s:PasteRegPreTmp  = '/tmp/r_pre.tmp'
 function! PasteReg(direction)
   let l:Cmds = []
   let l:PasteRegDirection = a:direction
-
   function! PasteRegCallback(job, status) closure
     if filereadable(s:PasteRegTmp)
       call add(l:Cmds, 'wincmd p')
@@ -394,22 +374,20 @@ function! PasteReg(direction)
       endfor
     endif
   endfunction
-
   execute 'silent redir! > ' . s:PasteRegPreTmp
   registers
   redir END
-
   let l:TermBufNum = term_start(s:PasteRegCmd, {'term_name':'paste register', 'hidden':0, 'term_finish':'close', 'norestore':1, 'vertical':1, 'exit_cb':'PasteRegCallback'})
   " let l:WinID = popup_create(l:TermBufNum, {'minwidth': 50, 'minheight': 20})
 endfunction
-
 nnoremap <SPACE>r :silent call PasteReg('p')<CR>
 nnoremap <SPACE>R :silent call PasteReg('P')<CR>
 
-" Wayland shortcuts
-let g:wayland_clipboard_copy_args = ['--primary', '--paste-once']
+" Wayland shortcuts to yank and paste to the system clipboard
+autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
+nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>pxnoremap "+y y:call system("wl-copy", @")<cr>
+nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
+nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 
 " Mappings for markdown-preview
-nmap <C-m> <Plug>MarkdownPreview
-nmap <C-l> <Plug>MarkdownPreviewStop
-nmap <C-p> <Plug>MarkdownPreviewToggle
+let vim_markdown_preview_hotkey='<C-m>'

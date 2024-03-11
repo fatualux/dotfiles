@@ -81,12 +81,6 @@ map Q gq
 " Revert with ":iunmap <C-U>".
 inoremap <C-U> <C-G>u<C-U>
 
-" Remap for system clipboard
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
-
 " When the +eval feature is missing, the set command above will be skipped.
 " Use a trick to reset compatible only when the +eval feature is missing.
 silent! while 0
@@ -352,42 +346,11 @@ function! ToggleAutoGit()
     let g:detect_line_changes_enabled = 1
     echo "AutoGit enabled"
   endif
-endfunction let s:PasteRegCmd     = '/.vim/r.sh'
-   let s:PasteRegTmp     = '/tmp/r.tmp'
-   let s:PasteRegPreTmp  = '/tmp/r_pre.tmp'
-
-" registers
-let s:PasteRegCmd   = '/.vim/r.sh'
-let s:PasteRegTmp   = '/tmp/r.tmp'
-let s:PasteRegPreTmp  = '/tmp/r_pre.tmp'
-
-function! PasteReg(direction)
-  let l:Cmds = []
-  let l:PasteRegDirection = a:direction
-  function! PasteRegCallback(job, status) closure
-    if filereadable(s:PasteRegTmp)
-      call add(l:Cmds, 'wincmd p')
-      let l:Cmd = 'norm "' . readfile(s:PasteRegTmp, '', 1)[0][0] . l:PasteRegDirection
-      call add(l:Cmds, l:Cmd)
-      for cmd in l:Cmds
-        execute cmd
-      endfor
-    endif
-  endfunction
-  execute 'silent redir! > ' . s:PasteRegPreTmp
-  registers
-  redir END
-  let l:TermBufNum = term_start(s:PasteRegCmd, {'term_name':'paste register', 'hidden':0, 'term_finish':'close', 'norestore':1, 'vertical':1, 'exit_cb':'PasteRegCallback'})
-  " let l:WinID = popup_create(l:TermBufNum, {'minwidth': 50, 'minheight': 20})
 endfunction
-nnoremap <SPACE>r :silent call PasteReg('p')<CR>
-nnoremap <SPACE>R :silent call PasteReg('P')<CR>
-
-" Wayland shortcuts to yank and paste to the system clipboard
-autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
-nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>pxnoremap "+y y:call system("wl-copy", @")<cr>
-nnoremap "+p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
-nnoremap "*p :let @"=substitute(system("wl-paste --no-newline --primary"), '<C-v><C-m>', '', 'g')<cr>p
 
 " Mappings for markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
+
+" Wayland shortcuts to yank and paste to the system clipboard
+nnoremap <C-p> :call setreg('"', system('wl-paste'))<CR>p
+xnoremap Y y:call system('wl-copy', getreg('"'))<CR>

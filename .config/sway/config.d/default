@@ -1,0 +1,232 @@
+# SET $mod key on SUPER
+set $alt Mod1
+set $mod Mod4
+set $EDITOR vim
+set $TERMINAL alacritty
+
+# BEMENU keybinds
+set $uifont "Xolonium 12"
+set $menu bemenu-run --fn $uifont -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
+bindsym $mod+Return exec --no-startup-id $menu
+
+# Your preferred terminal emulators
+set $term-float alacritty
+
+### Idle configuration
+exec swayidle -w\
+    timeout 1070 'swaylock -f -C ~/.config/swaylock/config'\
+    timeout 770 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -C ~/.config/swaylock/config'
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+## Lock Screen
+ bindsym $mod+f1 exec ~/.config/sway/scripts/lockman.sh
+
+# Rotate output clockwise
+bindsym $mod+F9 output eDP-1 transform 0
+bindsym $mod+Ctrl+F9 output eDP-1 transform 90
+# Rotate output anticlockwise
+bindsym $mod+Shift+F9 output eDP-1 transform 180
+
+### Key bindings
+#
+# Basics:
+    # Kill focused window
+    bindsym $mod+q kill
+
+    # Start your launcher
+    # bindsym $mod+d exec $menu
+    bindsym $mod+d exec $menu
+    # Launcher
+    bindsym $mod+Shift+d exec $launcher
+
+    # Cheatsheet
+    bindsym $mod+Shift+i exec $cheat
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+# Resizing containers:
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Resize floating windows with mouse scroll:
+bindsym --whole-window --border $mod+button4 resize shrink height 5 px or 5 ppt
+bindsym --whole-window --border $mod+button5 resize grow height 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button4 resize shrink width 5 px or 5 ppt
+bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 ppt
+
+floating_modifier $mod
+
+# Make the currently focused window a scratchpad
+bindsym Control+$alt+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $alt+minus scratchpad show
+
+# KILL shortcut
+bindsym Control+q kill
+# bindsym --release $alt+Control+q exec xkill &
+
+# Back and forth | Borders
+workspace_auto_back_and_forth yes
+hide_edge_borders smart
+popup_during_fullscreen smart
+
+# BIND SHORTCUTS
+
+# Applications
+bindsym $alt+Control+b exec dunstify -r 333 "FIREFOX" && firefox
+bindsym $alt+Control+h exec dunstify -r 333 "PCManFM" && pcmanfm
+bindsym $alt+Control+n exec dunstify -r 333 "TELEGRAM" && telegram-desktop
+bindsym $alt+Control+t exec dunstify -r 333 "SHELL" && alacritty
+bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
+bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
+bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && export EDITOR=vim && foot -e joshuto
+bindsym $alt+Control+w exec foot -e sh $HOME/.scripts/bash/yt_stream.sh
+bindsym $alt+Control+x exec foot -e sh $HOME/.scripts/bash/launcher.sh
+bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate.sh
+bindsym $alt+Control+u exec foot -e sh $HOME/.scripts/bash/comfyUI.sh
+
+# XF86 Fn keys
+
+# change volume or toggle mute
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 2 && dunstify -r 111 " + $(xbacklight -get)%"
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 2 && dunstify -r 111 " - $(xbacklight -get)%"
+
+# CHANGE FOCUS (with arrows)
+bindsym $alt+Left focus left
+bindsym $alt+Down focus down
+bindsym $alt+Up focus up
+bindsym $alt+Right focus right
+
+# MOVE FOCUSED WINDOW (with arrows)
+bindsym $alt+Shift+Left move left
+bindsym $alt+Shift+Down move down
+bindsym $alt+Shift+Up move up
+bindsym $alt+Shift+Right move right
+
+# Cycle through active workspaces
+bindsym $alt+Control+Right workspace next
+bindsym $alt+Control+Left workspace prev
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $alt+Control+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 0
+
+# move focused container to workspace
+bindsym $alt+Control+1 move container to workspace 1; workspace 1
+bindsym $alt+Control+2 move container to workspace 2; workspace 2
+bindsym $alt+Control+3 move container to workspace 3; workspace 3
+bindsym $alt+Control+4 move container to workspace 4; workspace 4
+bindsym $alt+Control+5 move container to workspace 5; workspace 5
+bindsym $alt+Control+6 move container to workspace 6; workspace 6
+bindsym $alt+Control+7 move container to workspace 7; workspace 7
+bindsym $alt+Control+8 move container to workspace 8; workspace 8
+bindsym $alt+Control+9 move container to workspace 9; workspace 9
+bindsym $alt+Control+0 move container to workspace 0; workspace 0
+
+# Creates a new workspace
+bindsym Control+$alt+c exec --no-startup-id ~/.config/i3/emptyWorkspace.sh
+
+bindsym Shift+Control+Right move container to workspace next
+bindsym Shift+Control+Left move container to workspace prev
+
+# System Mode - Super+x
+bindsym $mod+x mode "$mode_system"
+set $mode_SYSTEM (l) LOCK, (e) LOGOUT, (s) SUSPEND, (h) HIBERNATE, (r) REBOOT, (Shift+s) SHUTDOWN
+mode "$mode_system" {
+    bindsym l exec --no-startup-id .config/sway/swayexit lock, mode "default"
+    bindsym e exec --no-startup-id .config/sway/swayexit logout, mode "default"
+    bindsym s exec --no-startup-id .config/sway/swayexit suspend, mode "default"
+    bindsym h exec --no-startup-id .config/sway/swayexit hibernate, mode "default"
+    bindsym r exec --no-startup-id .config/sway/swayexit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id .config/sway/swayexit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $alt+Control+z restart
+bindsym $alt+Control+r reload
+bindsym $alt+Control+e exec "swaynag -t warning -m 'Do you really want to exit Sway? This will end your session.' -b 'Yes' 'swaymsg exit'"
+
+###BAR CONFIGURATION
+exec_always --no-startup-id ~/.config/waybar/waybar.sh
+
+# Set transparency for unfocused windows
+for_window [class=".*"] opacity 0.85
+
+# Set transparency for preferred terminal emulator
+for_window [class="Alacritty"] opacity 0.9
+
+# Screenshot keybinds
+bindsym $alt+Shift+p exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && dunstify -r 222 "SCREENSHOT AQUIRED."
+bindsym $alt+p exec grim -g "$(slurp)" - | wl-copy && dunstify -r 222 "Region captured."
+bindsym $alt+Control+p exec grim - | wl-copy && dunstify -r 222 "SCREENSHOT AQUIRED."
+
+ # Screenrecord keybinds
+bindsym $alt+Control+s exec wf-recorder -f ~/recording_$(date +"%Y-%m-%d_%H:%M:%S.mp4")
+bindsym $alt+Control+l exec killall wf-recorder

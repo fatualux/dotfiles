@@ -1,0 +1,42 @@
+#!/bin/sh
+# Sway if on tty1
+
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    echo ""
+    echo "Starting Sway..."
+    echo ""
+    exec sway --unsupported-gpu
+fi
+
+# Xorg if on tty2
+if [ "${XDG_VTNR}" -eq 2 ]; then
+    echo ""
+    echo "Starting Xorg..."
+    echo ""
+    exec startx
+fi
+
+# INITIAL SCREEN
+
+echo -ne "\\e[1m\\e[93mSYSTEM INFORMATION:";
+echo -e "\\e[1m\\e[96m";uname; uname -rm;
+
+echo ""
+
+echo -ne "\\e[1m\\e[93mUPTIME:";
+echo -e "\\e[1m\\e[96m";
+
+uptime=$(</proc/uptime)
+uptime=${uptime%%.*}
+
+seconds=$(( uptime%60 ))
+minutes=$(( uptime/60%60 ))
+hours=$(( uptime/60/60%24 ))
+days=$(( uptime/60/60/24 ))
+
+echo "$days days, $hours hours, $minutes minutes, $seconds seconds";
+
+echo " "
+
+### Default color:
+export PS1='\[\e[36m\][\u@\h \W]\$ \[\e(B\e[m\]'

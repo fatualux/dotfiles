@@ -1,0 +1,43 @@
+#/bin/bash
+
+# adds the history of the buffer to the end of the history file
+shopt -s histappend
+
+# prevent duplicate entries from being saved in the $HISTFILE
+export HISTCONTROL=ignoreboth:erasedups
+
+# updates the history cache
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
+# history -n reads all lines from $HISTFILE that may have occurred
+# in a different terminal since the last carriage return
+# history -w writes the updated buffer to $HISTFILE
+# history -c wipes the buffer so no duplication occurs
+# history -r re-reads the $HISTFILE, appending to the now blank buffer
+
+# stores the first occurrence of each line it encounters.
+# tac reverses it, and then reverses it back so that it can be saved with
+# the most recent commands still most recent in the History
+tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile  && tac /tmp/tmpfile > "$HISTFILE"
+rm /tmp/tmpfile
+
+export HISTFILESIZE=5000
+export HISTSIZE=1000
+
+# Function to remove last history lines
+# It takes the offset argument:
+# Example: histdel 10 (to remove first ten lines)
+# Example: histdeln 20 (to remove last twenty lines)
+
+histdel(){
+  for h in $(seq $1 $2); do
+    history -d $1
+  done
+  history -d $(history 1 | awk '{print $1}')
+  }
+
+histdeln(){
+  # Get the current history number
+  n=$(history 1 | awk '{print $1}')
+  # Call histdel with the appropriate range
+  histdel $(( $n - $1 )) $(( $n - 1 ))
+  }

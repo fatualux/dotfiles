@@ -1,0 +1,61 @@
+#!/bin/bash
+
+BATTERY=0
+BATTERY_INFO=$(acpi -b | grep "Battery ${BATTERY}")
+BATTERY_STATE=$(echo "${BATTERY_INFO}" | grep -wo "Full\|Charging\|Discharging")
+BATTERY_POWER=$(echo "${BATTERY_INFO}" | grep -o '[0-9]\+%' | tr -d '%')
+BATTERY_INFO=${BATTERY_INFO:11}
+TIME_LEFT=$(acpi | awk '{print "- " $5}')
+ICON=""
+COLOR=""
+
+battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+
+if [[ "${BATTERY_STATE}" = "Charging" ]]; then
+  if [ "$battery_level" -gt 81 ]; then
+  ICON=""
+  COLOR="#FFFFFF"
+  MESSAGE="Battery Full! Please disconnect from power source."
+  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#66FF13 $MESSAGE && sleep 5
+  espeak "$MESSAGE"
+  elif [[ "${BATTERY_POWER}" -le 94 ]]; then
+  ICON=""
+  COLOR="#FFFFFF"
+  else
+  ICON=""
+  COLOR="#00FF00"
+  fi
+elif [[ "${BATTERY_STATE}" = "Discharging" ]]; then
+  if [[ "${BATTERY_POWER}" -le 15 ]]; then
+  ICON=""
+  COLOR="#FF2222"
+  MESSAGE="LOW BATTERY! Please charge now!"
+  dunstify -h string:fgcolor:#000000 -h string:bgcolor:#FF0013 $MESSAGE && sleep 5
+  espeak "$MESSAGE"
+
+elif [[ "${BATTERY_POWER}" -le 25 ]]; then
+  ICON=""
+  COLOR="#AA9922"
+
+elif [[ "${BATTERY_POWER}" -le 50 ]]; then
+  ICON=""
+  COLOR="#99FF33"
+
+elif [[ "${BATTERY_POWER}" -le 75 ]]; then
+  ICON=""
+  COLOR="#11FF99"
+
+else
+  # 75 < BATTERY
+  ICON=""
+  COLOR="#11FF66"
+fi
+
+else
+  ICON=""
+  COLOR="#11EE22"
+fi
+
+echo "${ICON} ${BATTERY_POWER}% ${TIME_LEFT}"
+echo "${ICON} ${BATTERY_POWER}% ${TIME_LEFT}"
+echo $COLOR

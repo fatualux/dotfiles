@@ -1,0 +1,20 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+include "/home/fz/.gtkrc-2.0.mine"
+gtk-theme-name="Material-Black-Lime-LA"
+gtk-icon-theme-name="oomox-fz"
+gtk-font-name="Xolonium 11"
+gtk-cursor-theme-size=0
+gtk-cursor-theme-name="Dimension"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=0
+gtk-xft-hinting=0
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="none"

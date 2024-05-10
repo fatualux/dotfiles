@@ -1,0 +1,15 @@
+#/bin/bash
+
+alias grep='grep --color=auto'
+alias fluxion="cd $HOME/Downloads && sudo fluxion "
+alias tor-browser="sh Downloads/tor-browser/Browser/start-tor-browser"
+alias pip="python -m pip"
+alias pip3="python3 -m pip"
+alias wifite="cd $HOME/Downloads && sudo wifite "
+alias tor="sh -c '"$HOME/Downloads/tor-browser/Browser/start-tor-browser" --detach || ([ ! -x "$HOME/Downloads/tor-browser/Browser/start-tor-browser" ] && "$(dirname "$*")"/Browser/start-tor-browser --detach)' dummy %k $$ exit"
+alias powertop="sudo powertop --auto-tune && sudo powertop"
+alias sway="sway --unsupported-gpu"
+alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
+alias wget="aria2c"
+alias mobac="rm $HOME/.mobac/mobac-profile.xml && mobac"
+alias gparted="sudo -E gparted"

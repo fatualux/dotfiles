@@ -1,0 +1,265 @@
+# http://i3wm.org/docs/userguide.html
+
+      #SET $mod key on SUPER
+set $alt Mod1
+set $mod mod4
+      #FONT
+font pango: Xolonium 11
+
+# class                     border  backgr. text    indicator child_border
+client.focused              #339977 #339977 #339977 #339977   #339977
+client.focused_inactive     #333333 #121212 #339977 #484e50   #121212
+client.unfocused            #222222 #222222 #888888 #292d2e   #222222
+client.urgent               #900000 #900000 #900000 #900000   #900000
+client.placeholder          #000000 #0c0c0c #339977 #000000   #0c0c0c
+client.background           #000000
+
+floating_modifier $mod
+new_float  pixel 5
+
+
+# DMENU keybinds
+bindsym $mod+Return exec --no-startup-id dmenu_run -i -l 9 -p "" -nb "#010101" -nf "#33FF77" -sb "#115131" -sf "#ffffff" -fn "Xolonium 13"
+
+# Make the currently focused window ascratchp 1d
+bindsym Control+$alt+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $alt+minus scratchpad show
+
+#KILL shortcut
+bindsym Control+q kill
+bindsym --release $alt+Control+q exec xkill &
+
+# Back and forth | Borders
+workspace_auto_back_and_forth yes
+hide_edge_borders smart
+popup_during_fullscreen smart
+
+# BIND SHORTCUTS
+
+    # Applications
+bindsym $alt+Control+b exec dunstify -r 333 "FIREFOX" && firefox
+bindsym $alt+Control+h exec dunstify -r 333 "PCManFM" && pcmanfm
+bindsym $alt+Control+n exec dunstify -r 333 "TELEGRAM" && telegram-desktop
+bindsym $alt+Control+t exec dunstify -r 333 "SHELL" && alacritty
+bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
+bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
+bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && alacritty -e joshuto
+bindsym $alt+Control+w exec alacritty -e sh Apps/ytStream
+bindsym $alt+Control+m exec alacritty -e sh "Thunderbird" && thunderbird
+bindsym $alt+Control+x exec $HOME/Apps/rusteddrawer
+bindsym $alt+Control+y exec sh $HOME/Apps/translate
+bindsym $alt+Control+u exec alacritty -e comfyUI
+
+    # XF86 Fn keys
+
+# change volume or toggle mute
+
+bindsym XF86AudioRaiseVolume exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+bindsym XF86AudioLowerVolume exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+
+#bindsym Control+Up exec amixer set 'Master' 3%+ && pkill -RTMIN+1 i3blocks && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+#bindsym Control+Down exec amixer set 'Master' 3%- && pkill -RTMIN+1 i3blocks && dunstify -r 222 " VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+
+bindsym XF86AudioMute exec exec amixer sset Master toggle && pkill -RTMIN+1 i3blocks
+
+bindsym XF86AudioPlay exec --no-startup-id audacious --play
+bindsym XF86AudioPrev exec --no-startup-id audacious --prev
+bindsym XF86AudioNext exec --no-startup-id audacious --next
+bindsym XF86AudioStop exec --no-startup-id audacious --stop
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 2 && dunstify -r 111 " + $(xbacklight -get)%"
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 2 && dunstify -r 111 " - $(xbacklight -get)%"
+
+
+# CHANGE FOCUS (with arrows)
+bindsym $alt+Left focus left
+bindsym $alt+Down focus down
+bindsym $alt+Up focus up
+bindsym $alt+Right focus right
+
+# MOVE FOCUSED WINDOW (with arrows)
+bindsym $alt+Shift+Left move left
+bindsym $alt+Shift+Down move down
+bindsym $alt+Shift+Up move up
+bindsym $alt+Shift+Right move right
+
+# Cycle through active workspaces
+bindsym $alt+Control+Right workspace next
+bindsym $alt+Control+Left workspace prev
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $alt+Control+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 0
+
+# move focused container to workspace
+bindsym $alt+Control+1 move container to workspace 1; workspace 1
+bindsym $alt+Control+2 move container to workspace 2; workspace 2
+bindsym $alt+Control+3 move container to workspace 3; workspace 3
+bindsym $alt+Control+4 move container to workspace 4; workspace 4
+bindsym $alt+Control+5 move container to workspace 5; workspace 5
+bindsym $alt+Control+6 move container to workspace 6; workspace 6
+bindsym $alt+Control+7 move container to workspace 7; workspace 7
+bindsym $alt+Control+8 move container to workspace 8; workspace 8
+bindsym $alt+Control+9 move container to workspace 9; workspace 9
+bindsym $alt+Control+0 move container to workspace 0; workspace 0
+
+# Creates a new workspace
+bindsym Control+$alt+c exec --no-startup-id ~/.config/i3/emptyWorkspace.sh
+
+bindsym Shift+Control+Right move container to workspace next
+bindsym Shift+Control+Left move container to workspace prev
+
+# System Mode - Super+x
+bindsym $mod+x mode "$mode_system"
+set $mode_SYSTEM  (l) LOCK, (e) LOGOUT, (s) SUSPEND, (h) HIBERNATE, (r) REBOOT, (Shift+s) SHUTDOWN
+mode "$mode_system" {
+    bindsym l exec --no-startup-id .config/i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id .config/i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id .config/i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id .config/i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id .config/i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id .config/i3/i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $alt+Control+z reload
+bindsym $alt+Control+r restart
+bindsym $alt+Control+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3? This will end your X session.' -b 'YES' 'i3-msg exit'"
+
+# Resize mode
+mode "resize" {
+        bindsym Left resize shrink width 9 px or 9 ppt
+        bindsym Down resize grow height 9 px or 9 ppt
+        bindsym Up resize shrink height 9 px or 9 ppt
+        bindsym Right resize grow width 9 px or 9 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Pressing Super+m will hide the bar
+# pressing it again will show the bar
+bindsym $mod+m exec i3-msg bar mode toggle
+
+###BAR CONFIGURATION
+bar {
+  status_command i3blocks -c .config/i3-blocks/config
+  i3bar_command i3bar
+  font pango: Xolonium 9
+  position top
+  mode dock
+  modifier Mod1
+  colors {
+          background #000000
+          statusline #FFFFFF
+          separator #A0A0A0
+          focused_workspace #080808 #30FF30 #000000
+          active_workspace #080808 #080808 #797979
+          inactive_workspace #080808 #080808 #4F4F4F
+          urgent_workspace #080808 #080808 #FF4C59
+  }
+}
+
+# Startup programs
+exec --no-startup-id picom &
+exec --no-startup-id feh --bg-fill ~/.config/i3/background.jpg
+exec --no-startup-id dunst &
+exec_always --no-startup-id nm-applet
+exec_always --no-startup-id "picom -b --experimental-backend"
+exec_always --no-startup-id "i3-autolayout autolayout"
+exec_always --no-startup-id telegram-desktop
+exec_always --no-startup-id udiskie -2 -s &
+
+# Windows rules
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Pinentry"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [window_type="mpv"] floating enable
+for_window [window_type="notification"] floating enable
+for_window [window_type="rusteddrawe"] floating enable
+for_window [window_type="dropdown_menu"] floating enable
+for_window [class=".*"] border pixel 3
+# for_window [class="(?i)alacritty"] floating enable
+
+for_window [instance="scratchpad"] floating enable
+for_window [instance="scratchpad"] move window to scratchpad
+for_window [class="Firefox"] border pixel 1
+assign [class="Telegram"] → 0
+assign [class="firefox"] → 1
+assign [class="keepassxc"] → 1
+
+#custom app commands (?i) case insenitive
+for_window [class="(?i)XTerm"] floating enable move right 660px, move down 300px
+#for_window [class="(?i)Alacritty"] floating enable
+for_window [class="(?i)feh"] floating enable
+for_window [class="(?i)viewnior"] floating enable
+for_window [class="(?i)pavucontrol"] floating enable
+for_window [class="(?i)blueberry"] floating enable
+
+#use "xmodmap -pke" to get list of special keys
+#custom special key fixes
+bindsym $mod+Ctrl+Escape exec i3lock-wrapper -l
+
+ # Screenshot keybinds
+bindsym $alt+Shift+p exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/Screen/' && dunstify -r 222 "SCREENSHOT AQUIRED."
+bindsym --release $alt+P exec scrot -s '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'xclip -selection clipboard -target image/png -i $f && rm $f' && dunstify -r 222 "Region captured."
+bindsym $mod+P exec scrot -u '%Y-%m-%d-%s_screenshot_$wx$h.jpg' && dunstify -r 222 "Window captured."
+bindsym $alt+Control+p exec scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f && rm $f' && dunstify -r 222 "SCREENSHOT TO CLIPBOARD."
+
+ # Screenrecord keybinds
+bindsym $alt+Control+s exec peek
+
+### Autolayout
+exec_always autotiling -w 1 3 5 7 9
+
+#GTK theme apply
+exec gsettings set org.gnome.desktop.interface cursor-theme "Hacked-aio"
+exec gsettings set org.gnome.desktop.interface gtk-theme "Material-Black-Lime-LA"
+exec gsettings set org.gnome.desktop.interface icon-theme "oomox-fz"
+exec gsettings set org.gnome.desktop.interface font-name "Xolonium 11"

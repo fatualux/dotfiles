@@ -1,0 +1,35 @@
+#!/usr/bin/bash
+
+full=""
+short=""
+status=0
+
+getBrightness() {
+  xbacklight -getf
+}
+
+case "$BLOCK_BUTTON" in
+  # Scroll up, raise brightness
+  4) xbacklight -inc 10;;  # Increase the value to control the increment amount
+  # Scroll down, lower brightness
+  5) xbacklight -dec 10;;  # Increase the value to control the decrement amount
+esac
+
+light=$(getBrightness)
+
+# Set the default icon to "" (no brightness)
+icon=""
+
+if (( $(echo "$light < 50" | bc -l) )); then
+  icon=""  # Low brightness
+elif (( $(echo "$light < 100" | bc -l) )); then
+  icon=""  # Medium brightness
+else
+  icon=""  # Full brightness
+fi
+
+full="$icon ${light%.*}%"
+short=$light
+
+echo $full
+exit $status

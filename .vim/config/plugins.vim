@@ -16,6 +16,5 @@ Plug 'python-mode/python-mode'
 Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
-Plug 'dart-lang/dart-vim-plugin'
 Plug 'wincent/ferret'
 call plug#end()

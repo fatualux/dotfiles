@@ -114,7 +114,6 @@ keymap = [
 
  { keys = [ "m", "s" ],  command = "linemode size" },
  { keys = [ "m", "m" ],  command = "linemode mtime" },
- { keys = [ "m", "M" ],  command = "linemode sizemtime" },
 
  { keys = [ "g", "r" ],  command = "cd /" },
  { keys = [ "g", "c" ],  command = "cd ~/.config" },
@@ -123,6 +122,7 @@ keymap = [
  { keys = [ "g", "h" ],  command = "cd ~/" },
  { keys = [ "g", "p" ],  command = "cd ~/Documents/Projects" },
  { keys = [ "g", "s" ],  command = "cd ~/.scripts" },
+ { keys = [ "g", "v" ],  command = "cd ~/.virtualenv" },
  { keys = [ "?" ],  command = "help" }
 ]
 

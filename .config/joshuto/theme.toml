@@ -27,7 +27,7 @@ bold = true
 fg = "light_red"
 bold = true
 
-[selection.prefix]
+[selection_prefix]
 prefix = "  "
 size = 2
 

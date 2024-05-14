@@ -10,6 +10,5 @@ alias tor="sh -c '"$HOME/Downloads/tor-browser/Browser/start-tor-browser" --deta
 alias powertop="sudo powertop --auto-tune && sudo powertop"
 alias sway="sway --unsupported-gpu"
 alias scrcpy="scrcpy -w --disable-screensaver --kill-adb-on-close & --disown "
-alias wget="aria2c"
 alias mobac="rm $HOME/.mobac/mobac-profile.xml && mobac"
 alias gparted="sudo -E gparted"

@@ -123,6 +123,7 @@ keymap = [
  { keys = [ "g", "p" ],  command = "cd ~/Documents/Projects" },
  { keys = [ "g", "s" ],  command = "cd ~/.scripts" },
  { keys = [ "g", "v" ],  command = "cd ~/.virtualenv" },
+ { keys = [ "g", "m" ],  command = "cd /home/media/" },
  { keys = [ "?" ],  command = "help" }
 ]
 

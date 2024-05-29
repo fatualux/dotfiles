@@ -61,7 +61,7 @@ bar {
    swaybar_command waybar
 }
 
-# Set the background image
-output * bg ../background.jpg fill #000000
+# Set the background image (replaced by ~/.config/sway/scripts/cycle_wallz.sh
+output * bg ../wallpapers/20.jpg fill #000000
 
 seat seat0 xcursor_theme "Dimension" 10

@@ -130,14 +130,15 @@
         "on-click": "pavucontrol"
     },
     "custom/pacman": {
-          "format": "{icon}{}",
-          "return-type": "json",
-          "format-icons": {
-          "pending-updates": " ",
-          "updated": ""
-          },
-          "exec-if": "which waybar-updates",
-          "exec": "waybar-updates"
+        "format": "{icon}{}",
+        "return-type": "json",
+        "format-icons": {
+            "pending-updates": " ",
+            "updated": ""
+        },
+        "exec-if": "which waybar-updates",
+        "exec": "waybar-updates",
+        "on-click": "alacritty -e bash -c 'sh ~/.config/waybar/custom/update.sh; exec bash'"
     },
     "bluetooth": {
         "format-on": " - ON",

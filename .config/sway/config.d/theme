@@ -1,12 +1,12 @@
-include catppuccin-mocha
 # Apply gtk theming
 set $gnome-schema org.gnome.desktop.interface
 
+# Set global GTK Theme preference
 exec_always {
-    gsettings set $gnome-schema gtk-theme 'Material-Black-Lime-LA'
-    gsettings set $gnome-schema icon-theme 'oomox-fz'
-    gsettings set $gnome-schema cursor-theme 'Dimension'
-    gsettings set $gnome-schema font-name 'Xolonium 11'
+  gsettings set $gnome-schema gtk-theme 'Material-Black-Lime-LA'
+  gsettings set $gnome-schema icon-theme 'oomox-fz'
+  gsettings set $gnome-schema font-name 'Xolonium 11'
+  gsettings set $gnome-schema cursor-theme 'Dimension'
 }
 
 # Set inner/outer gaps
@@ -26,14 +26,14 @@ smart_borders on
 for_window [shell="xdg_shell"] title_format "%title (%app_id)"
 for_window [shell="x_wayland"] title_format "%class - %title"
 
-# Set gaps for windows with rounded corners
+# Set window borders and rounded corners
 for_window [class="^.*"] border pixel 3
-for_window [class="^.*"] border radius 0
+for_window [class="^.*"] border radius 1
 
 for_window [app_id="^.*"] border pixel 3
-for_window [app_id="^.*"] border radius 0
+for_window [app_id="^.*"] border radius 1
 
-set $opacity 0.9
+set $opacity 1
 
 for_window [class=".*"] opacity $opacity
 for_window [app_id=".*"] opacity $opacity
@@ -42,6 +42,7 @@ for_window [window_type="dialog"] floating enable
 for_window [window_role="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 for_window [class="yad"] floating enable
+for_window [class="zenity"] floating enable
 assign [class="Telegram"] → 0
 # assign [class="^Alacritty$" instance="^htop$"] -> 9
 
@@ -53,15 +54,17 @@ client.urgent #900000 #900000 #900000 #900000 #900000
 client.placeholder #000000 #0c0c0c #339977 #000000 #0c0c0c
 client.background #000000
 
-#
 # Status Bar:
-#
+
 # Read `man 5 sway-bar` for more information about this section.
 bar {
    swaybar_command waybar
 }
 
-# Set the background image (replaced by ~/.config/sway/scripts/cycle_wallz.sh
-output * bg ../wallpapers/20.jpg fill #000000
+# Set the background image
+# exec_always --no-startup-id swaybg -i ~/.config/sway/background.jpg
+
+# Set the background image (replaced by ~/.config/sway/scripts.d/cycle-wallz.sh)
+# output * bg ../wallpapers/20.jpg fill #000000
 
 seat seat0 xcursor_theme "Dimension" 10

@@ -22,17 +22,15 @@ exec swayidle -w\
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-## Lock Screen
- bindsym $mod+f1 exec ~/.config/sway/scripts/lockman.sh
-
 # Rotate output clockwise
-bindsym $mod+F9 output eDP-1 transform 0
 bindsym $mod+Ctrl+F9 output eDP-1 transform 90
 # Rotate output anticlockwise
 bindsym $mod+Shift+F9 output eDP-1 transform 180
+# Restore original orientation
+bindsym $mod+F9 output eDP-1 transform 0
 
 ### Key bindings
-#
+
 # Basics:
     # Kill focused window
     bindsym $mod+q kill
@@ -40,11 +38,6 @@ bindsym $mod+Shift+F9 output eDP-1 transform 180
     # Start your launcher
     # bindsym $mod+d exec $menu
     bindsym $mod+d exec $menu
-    # Launcher
-    bindsym $mod+Shift+d exec $launcher
-
-    # Cheatsheet
-    bindsym $mod+Shift+i exec $cheat
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -114,10 +107,10 @@ bindsym $alt+Control+u exec foot -e sh $HOME/.scripts/bash/comfyUI.sh
 # XF86 Fn keys
 
 # change volume or toggle mute
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && dunstify -r 222 "  VOLUME: $(amixer get Master|tail -n1|sed -E 's/.*\[([0-9]+)\%\].*/\1/')%"
 
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 2 && dunstify -r 111 " + $(xbacklight -get)%"
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 2 && dunstify -r 111 " - $(xbacklight -get)%"
@@ -189,7 +182,7 @@ bindsym $alt+Control+9 move container to workspace 9; workspace 9
 bindsym $alt+Control+0 move container to workspace 0; workspace 0
 
 # Creates a new workspace
-bindsym Control+$alt+c exec --no-startup-id ~/.config/i3/emptyWorkspace.sh
+bindsym Control+$alt+c exec --no-startup-id ~/.config/sway/scripts.d/emptyWorkspace.sh
 
 bindsym Shift+Control+Right move container to workspace next
 bindsym Shift+Control+Left move container to workspace prev
@@ -213,9 +206,6 @@ mode "$mode_system" {
 bindsym $alt+Control+z restart
 bindsym $alt+Control+r reload
 bindsym $alt+Control+e exec "swaynag -t warning -m 'Do you really want to exit Sway? This will end your session.' -b 'Yes' 'swaymsg exit'"
-
-###BAR CONFIGURATION
-exec_always --no-startup-id ~/.config/waybar/waybar.sh
 
 # Set transparency for unfocused windows
 for_window [class=".*"] opacity 0.85

@@ -1,19 +1,24 @@
-# Auth with polkit-gnome:
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 # Pipewire
 exec pipewire
+exec pipewire-media-session
 
+### GNOME-SESSION DEPENDENCIES ###
 # GTK3 applications take a long time to start
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd $DISPLAY $WAYLAND_DISPLAY $SWAYSOCK
+# Gnome Keyring
+exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
+# Combine multiple commands into a single exec command
+exec gsettings set org.gnome.desktop.background show-desktop-icons false --user
+# Use a consistent naming convention for your exec commands
+exec_always gsettings_set_org_gnome_desktop_background show-desktop-icons false --user
 
-# Autotiling
-exec autotiling
+# Auth with polkit-gnome:
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# Wlsunset
-exec ~/.config/sway/scripts/light.sh
+### Autolayout
+exec_always autotiling
 
 # nm-applet
 exec nm-applet --indicator
@@ -21,10 +26,7 @@ exec nm-applet --indicator
 # Clipman
 exec wl-paste -t text --watch clipman store --no-persist
 
-# Gnome Keyring
-exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
-
-# for Touchpad gestures
+# Touchpad gestures
 exec libinput-gestures-setup start
 
 # Xdg DEsktop Portal
@@ -36,17 +38,8 @@ exec_always tracker --no-startup-notification --no-notify
 # SwayRD
 exec_always swayrd
 
-# PipeWire for media playback
-exec pipewire-media-session
+# Custom scripts
+exec_always ~/.config/sway/scripts.d/cycle-wallz.sh
 
-# Combine multiple commands into a single exec command
-exec gsettings set org.gnome.desktop.background show-desktop-icons false --user
-
-# Use a consistent naming convention for your exec commands
-exec_always gsettings_set_org_gnome_desktop_background show-desktop-icons false --user
-
-# Set global GTK Theme preference
-exec_always gsettings set org.gnome.desktop.interface gtk-theme 'Material-Black-Lime-LA'
-exec_always gsettings set org.gnome.desktop.interface icon-theme 'oomox-fz'
-exec_always gsettings set org.gnome.desktop.interface font-name 'Xolonium 11'
-exec_always gsettings set org.gnome.desktop.interface cursor-theme 'Dimension'
+# BAR CONFIGURATION
+exec_always --no-startup-id ~/.config/waybar/waybar.sh

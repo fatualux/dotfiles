@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# function to stop wallpaper cycle
-stop_cycle() {
-  killall swaybg
-  exit
-}
+# this script in a variable
+THIS_SCRIPT="$(readlink -f "${BASH_SOURCE[0]}")"
 
 # Set the directory where the backgrounds are stored
 BACKGROUND_DIR="$HOME/.config/sway/wallz"
@@ -36,6 +33,7 @@ cycle_wallpaper() {
     echo "Next background: $NEXT_BACKGROUND"
 
     # Set the background to the next background
+    # fade to black
     killall swaybg
     swaybg --output '*' --mode fill --image "$NEXT_BACKGROUND" &
 
@@ -51,6 +49,8 @@ cycle_wallpaper() {
 
 # Infinite loop to cycle wallpapers every 90 seconds
 while true; do
+    echo "Cycling wallpaper..."
+    killall -f $THIS_SCRIPT
     cycle_wallpaper
     sleep 90
 done

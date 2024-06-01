@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# function to stop wallpaper changing
-stop_wallpaper() {
+# function to stop wallpaper cycle
+stop_cycle() {
   killall swaybg
   exit
 }
@@ -50,7 +50,6 @@ cycle_wallpaper() {
 }
 
 # Infinite loop to cycle wallpapers every 90 seconds
-trap stop_wallpaper EXIT
 while true; do
     cycle_wallpaper
     sleep 90

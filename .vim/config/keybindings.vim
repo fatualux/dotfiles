@@ -10,4 +10,8 @@ map <C-x> :Codeium Enable <CR>
 map <C-z> :Codeium Disable <CR>
 " Control+a to select all.
 map <C-a> <esc>ggVG<CR>
-map <C-u> :Ack 
+" map C-u to Ack + current word under cursor  + case insensitive + current dir
+" Prefer `ag` over `rg`.
+let g:FerretExecutable='git grep,ag,grep'
+" search current object under the cursor
+nmap <C-u> :Ack <C-R><C-W><CR>

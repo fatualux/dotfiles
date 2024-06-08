@@ -118,13 +118,12 @@ keymap = [
  { keys = [ "g", "r" ],  command = "cd /" },
  { keys = [ "g", "c" ],  command = "cd ~/.config" },
  { keys = [ "g", "d" ],  command = "cd ~/Downloads" },
- { keys = [ "g", "e" ],  command = "cd ~/Documents/Github" },
  { keys = [ "g", "h" ],  command = "cd ~/" },
  { keys = [ "g", "p" ],  command = "cd ~/Documents/Projects" },
  { keys = [ "g", "s" ],  command = "cd ~/.scripts" },
  { keys = [ "g", "v" ],  command = "cd ~/.virtualenv" },
  { keys = [ "g", "m" ],  command = "cd /home/media/" },
- { keys = [ "g", "g" ],  command = "cd ~/Documents/Github/" },
+ { keys = [ "g", "e" ],  command = "cd ~/Documents/Github/" },
  { keys = [ "?" ],  command = "help" }
 ]
 

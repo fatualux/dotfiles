@@ -124,6 +124,7 @@ keymap = [
  { keys = [ "g", "s" ],  command = "cd ~/.scripts" },
  { keys = [ "g", "v" ],  command = "cd ~/.virtualenv" },
  { keys = [ "g", "m" ],  command = "cd /home/media/" },
+ { keys = [ "g", "g" ],  command = "cd ~/Documents/Github/" },
  { keys = [ "?" ],  command = "help" }
 ]
 

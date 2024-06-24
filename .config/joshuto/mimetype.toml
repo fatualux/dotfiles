@@ -174,13 +174,16 @@ odt.inherit = "libreoffice_default"
 odf.inherit = "libreoffice_default"
 ods.inherit = "libreoffice_default"
 odp.inherit = "libreoffice_default"
-
 doc.inherit = "libreoffice_default"
 docx.inherit = "libreoffice_default"
 xls.inherit = "libreoffice_default"
 xlsx.inherit = "libreoffice_default"
 ppt.inherit = "libreoffice_default"
 pptx.inherit = "libreoffice_default"
+
+epub.app_list = [
+ { command = "calibre", fork = true, silent = true }
+]
 
 html.app_list = [
  { command = "firefox" },

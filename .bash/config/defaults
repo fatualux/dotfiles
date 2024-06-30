@@ -1,5 +1,8 @@
 #/bin/bash
 
+# set vim mode
+set -o vi
+
 # shopt options
 shopt -s cdspell         # This will correct minor spelling errors in a cd command.
 shopt -s checkwinsize    # Check window after each command and updates the values of LINES and COLUMNS

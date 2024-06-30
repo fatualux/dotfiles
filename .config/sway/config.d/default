@@ -99,7 +99,7 @@ bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
 bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
 bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && export EDITOR=vim && foot -e joshuto
 bindsym $alt+Control+m exec dunstify -r 333 "Thunderbird" && thunderbird
-bindsym $alt+Control+w exec foot -e sh $HOME/.scripts/bash/yt_stream.sh
+bindsym $alt+Control+w exec dunstify -r 333 "Nuclear Player" && nuclear
 bindsym $alt+Control+x exec foot -e sh $HOME/.scripts/bash/launcher.sh
 bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate.sh
 bindsym $alt+Control+u exec foot -e sh $HOME/.scripts/bash/comfyUI.sh

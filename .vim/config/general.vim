@@ -141,9 +141,6 @@ autocmd BufEnter * :syntax sync fromstart
 " Setting folding method to 'indent'
 :setlocal foldmethod=manual
 
-" Map shortcut to toggle fold/unfold
-map f za
-map F zf
 map T :term
 
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"

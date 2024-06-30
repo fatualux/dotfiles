@@ -39,8 +39,8 @@ exec_always tracker --no-startup-notification --no-notify
 exec_always swayrd
 
 # Custom scripts
-exec_always --no-startup-id "killall -q cycle-wallz.sh"
-exec_always --no-startup-id ~/.config/sway/scripts.d/cycle-wallz.sh
+# exec_always --no-startup-id "killall -q cycle-wallz.sh"
+# exec_always --no-startup-id ~/.config/sway/scripts.d/cycle-wallz.sh
 
 # BAR CONFIGURATION
 exec_always --no-startup-id ~/.config/waybar/waybar.sh

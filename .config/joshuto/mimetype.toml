@@ -32,6 +32,7 @@ text_default = [
 reader_default = [
  { command = "evince", fork = true, silent = true },
  { command = "lodraw" },
+ { command = "scribus" },
  { command = "dragon-drop", fork = true, silent = true },
 
 ]
@@ -210,6 +211,9 @@ tex.app_list = [
 
 torrent.app_list = [
  { command = "qbittorrent" } ]
+
+sla.app_list = [
+ { command = "scribus" }]
 
 [mimetype]
 

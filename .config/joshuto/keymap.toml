@@ -92,7 +92,7 @@ keymap = [
  { keys = [ ";" ],  command = ":" },
 
  { keys = [ "-" ],  command = ":shell " },
- { keys = [ "T" ],  command = ":shell alacritty" },
+ { keys = [ "T" ],  command = ":shell bash" },
  { keys = [ "ctrl+n" ],  command = ":mkdir " },
  { keys = [ "r", "n", "m" ],  command = ":rename " },
  { keys = [ "z" ],  command = ":zip" },

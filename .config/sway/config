@@ -5,8 +5,9 @@ include $HOME/.config/sway/config.d/*
 
 # Set the initial keyboard layout
 input * {
-    xkb_layout "it"
+    xkb_layout "us, it"
+    xkb_options "grp:alt_shift_toggle,grp:mod1_e_toggle" 
 }
 
 # Check if XWayland is running
-exec_always "pgrep -x Xwayland || (setsid sway && swaymsg exit)"
+  exec_always "pgrep -x Xwayland || (setsid sway && swaymsg exit)"

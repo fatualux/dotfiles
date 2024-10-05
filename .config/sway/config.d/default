@@ -103,6 +103,8 @@ bindsym $alt+Control+w exec dunstify -r 333 "Nuclear Player" && nuclear
 bindsym $alt+Control+x exec foot -e sh $HOME/.scripts/bash/launcher.sh
 bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate.sh
 bindsym $alt+Control+u exec foot -e sh $HOME/.scripts/bash/comfyUI.sh
+bindsym $alt+Shift+c exec sh $HOME/.scripts/bash/clipboard.sh -nc
+bindsym $alt+Shift+r exec sh $HOME/.scripts/bash/clipboard.sh -r
 
 # XF86 Fn keys
 

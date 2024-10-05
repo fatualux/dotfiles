@@ -1,31 +1,13 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 33,
+    "height": 38,
     "width": 800,
     "margin": "3, 0, 2, 0",
-    "spacing": 4, // Gaps between modules (4px)
-    // Choose the order of the modules
+    "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-    "modules-center": ["keyboard-state",],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "disk", "custom/gpu", "temperature", "battery", "battery#bat2", "custom/pacman", "network", "netspeed", "tray", "bluetooth", "clock", "custom/power"],
-    // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+    "modules-center": ["keyboard-state"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "disk", "custom/gpu", "temperature", "battery", "custom/pacman", "network", "tray", "bluetooth", "clock", "custom/power"],
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -53,11 +35,9 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
-        // "timezone": "Europe/Rome",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     },
@@ -70,21 +50,16 @@
         "on-click": "cpupower-gui"
     },
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        // "format-critical": " {icon} {temperatureC}°C",
         "format": " {icon} {temperatureC}°C",
         "format-icons": ["", "", ""]
     },
     "backlight": {
-        // "device": "acpi_video1",
         "format": " {icon} {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": ["", ""]
     },
     "battery": {
         "states": {
-            // "good": 95,
             "warning": 30,
             "critical": 15
         },
@@ -92,13 +67,7 @@
         "interval": 1,
         "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
-        "format-alt": " {icon} {time}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-      "bat": "BAT2"
     },
     "network": {
         "interface": "wlan0",
@@ -111,42 +80,25 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
         "on-click": "pavucontrol"
     },
     "custom/pacman": {
-        "format": "{icon}{}",
-        "return-type": "json",
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300",
+        "format": "{icon}{text}",
         "format-icons": {
-            "pending-updates": " ",
-            "updated": ""
+            "has-updates": "󱍷",
+            "updated": "󰂪"
         },
-        "exec-if": "which waybar-updates",
-        "exec": "waybar-updates",
-        "on-click": "alacritty -e bash -c 'sh ~/.config/waybar/custom/update.sh; exec bash'"
+        "return-type": "json",
+        "on-click": "alacritty -e bash -c 'sh ~/.config/waybar/custom/update.sh; exec bash'",
     },
-    "bluetooth": {
+      "bluetooth": {
         "format-on": " - ON",
         "format-disabled": " - OFF",
         "interval": 3,
         "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
         "on-click": "blueberry"
     },
     "custom/power": {
@@ -156,15 +108,14 @@
     },
     "custom/gpu": {
         "exec": "$HOME/.config/waybar/custom/gpu.sh",
-        "format-icons": ["", ""],
-        "format": "{icon} {}",
-        "return-type": "",
+        "format": "{0}",
+        "return-type": "text",
         "on-click": "nvidia-settings",
-        "interval": 1
+        "interval": 10
     },
     "disk": {
         "interval": 30,
         "format": "  {percentage_free}%",
-        "on-click": "$HOME/.config/waybar/custom/disk.sh > /tmp/script_log.txt 2>&1",
-    },
+        "on-click": "$HOME/.config/waybar/custom/disk.sh > /tmp/script_log.txt 2>&1"
+    }
 }

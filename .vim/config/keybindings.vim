@@ -1,5 +1,5 @@
 map <C-f> :Explore<CR>
-map <C-s> :split <CR>
+map <C-s> :vsplit <CR>
 map <C-t> :tabnew <CR>
 map <C-w> :tabclose <CR>
 map <Tab> :tabnext <CR>

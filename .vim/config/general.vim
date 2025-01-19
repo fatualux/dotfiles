@@ -141,8 +141,6 @@ autocmd BufEnter * :syntax sync fromstart
 " Setting folding method to 'indent'
 :setlocal foldmethod=manual
 
-map T :term
-
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 " fuzzy finder
@@ -156,6 +154,24 @@ endf
 " Mappings for markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
 
-" Wayland shortcuts to yank and paste to the system clipboard
-nnoremap <C-p> :call setreg('"', system('wl-paste'))<CR>p
-xnoremap Y y:call system('wl-copy', getreg('"'))<CR>
+let g:ale_fixers = {
+\   'python': [
+\       'add_blank_lines_for_python_control_statements',
+\       'autoflake',
+\       'autoimport',
+\       'autopep8',
+\       'black',
+\       'isort',
+\       'pycln',
+\       'pyflyby',
+\       'reorder-python-imports',
+\       'ruff',
+\       'ruff_format',
+\       'yapf'
+\   ],
+\   '*': [
+\       'remove_trailing_lines',
+\       'trim_whitespace'
+\   ]
+\}
+

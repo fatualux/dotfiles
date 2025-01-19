@@ -5,7 +5,7 @@ include $HOME/.config/sway/config.d/*
 
 # Set the initial keyboard layout
 input * {
-    xkb_layout "us, it"
+    xkb_layout "it, us"
     xkb_options "grp:alt_space_toggle,grp:mod1_e_toggle" 
 }
 

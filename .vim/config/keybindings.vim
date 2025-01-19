@@ -15,3 +15,30 @@ map <C-a> <esc>ggVG<CR>
 let g:FerretExecutable='git grep,ag,grep'
 " search current object under the cursor
 nmap <C-u> :Ack <C-R><C-W><CR>
+" settings for Ale Linting for Python
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+map <C-k> :ALEFix <CR>
+let g:ale_python_flake8_options = '--max-line-length=79'
+let g:ale_fixers = {
+\   'python': [
+\       'add_blank_lines_for_python_control_statements',
+\       'autoflake',
+\       'autoimport',
+\       'autopep8',
+\       'black',
+\       'isort',
+\       'pycln',
+\       'pyflyby',
+\       'reorder-python-imports',
+\       'ruff',
+\       'ruff_format',
+\       'yapf'
+\   ],
+\   '*': [
+\       'remove_trailing_lines',
+\       'trim_whitespace'
+\   ]
+\}
+
+

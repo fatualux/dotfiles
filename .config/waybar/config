@@ -83,15 +83,15 @@
         "format": "{volume}% {icon} {format_source}",
         "on-click": "pavucontrol"
     },
-    "custom/pacman": {
-        "exec-if": "which waybar-module-pacman-updates",
-        "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300",
-        "format": "{icon}{text}",
+    "custom/update": {
+        "format": "{} {icon}",
+        "return-type": "json",
         "format-icons": {
             "has-updates": "󱍷",
             "updated": "󰂪"
         },
-        "return-type": "json",
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300 --no-zero-input",
         "on-click": "alacritty -e bash -c 'sh ~/.config/waybar/custom/update.sh; exec bash'",
     },
       "bluetooth": {

@@ -62,6 +62,6 @@ bar {
 }
 
 # Set the background image
-exec_always --no-startup-id swaybg -i ~/.config/sway/wallz/wall_01.jpg
+exec_always --no-startup-id pkill swaybg; swaybg -m fill -i ~/.config/sway/wallz/wall_01.jpg &
 
 seat seat0 xcursor_theme "Dimension" 10

@@ -17,4 +17,5 @@ Plug 'rust-lang/rust.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 Plug 'wincent/ferret'
+Plug 'dense-analysis/ale'
 call plug#end()

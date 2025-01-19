@@ -1,6 +1,7 @@
 # Pipewire
 exec pipewire
 exec pipewire-media-session
+exec dunst
 
 ### GNOME-SESSION DEPENDENCIES ###
 # GTK3 applications take a long time to start

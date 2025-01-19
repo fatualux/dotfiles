@@ -154,6 +154,10 @@ endf
 " Mappings for markdown-preview
 let vim_markdown_preview_hotkey='<C-m>'
 
+" settings for Ale Linting for Python
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_python_flake8_options = '--max-line-length=79'
 let g:ale_fixers = {
 \   'python': [
 \       'add_blank_lines_for_python_control_statements',

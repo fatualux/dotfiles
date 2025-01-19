@@ -21,10 +21,8 @@ let g:FerretExecutable='git grep,ag,grep'
 nmap <C-u> :Ack <C-R><C-W><CR>
 
 " settings for Ale Linting for Python
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
 map <C-k> :ALEFix <CR>
-let g:ale_python_flake8_options = '--max-line-length=79'
+
 map T :term
 
 " Wayland shortcuts to yank and paste to the system clipboard

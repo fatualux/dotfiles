@@ -7,7 +7,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["keyboard-state"],
-    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "disk", "custom/gpu", "temperature", "battery", "custom/pacman", "network", "tray", "bluetooth", "clock", "custom/power"],
+    "modules-right": ["idle_inhibitor", "backlight", "pulseaudio", "cpu", "memory", "disk", "custom/gpu", "temperature", "network", "tray", "bluetooth", "battery", "custom/updates", "clock", "custom/power"],
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -58,17 +58,6 @@
         "format": " {icon} {percent}%",
         "format-icons": ["", ""]
     },
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": " {icon} {capacity}% ",
-        "interval": 1,
-        "format-charging": "  {capacity}%",
-        "format-plugged": "  {capacity}%",
-        "format-icons": ["", "", "", "", ""]
-    },
     "network": {
         "interface": "wlan0",
         "format-wifi": "  {essid} ({signalStrength}%) -   {bandwidthDownBytes}  {bandwidthUpBytes}",
@@ -83,16 +72,28 @@
         "format": "{volume}% {icon} {format_source}",
         "on-click": "pavucontrol"
     },
-    "custom/update": {
+    "custom/updates": {
         "format": "{} {icon}",
         "return-type": "json",
         "format-icons": {
-            "has-updates": "󱍷",
-            "updated": "󰂪"
+            "has-updates": "",
+            "updated": ""
         },
         "exec-if": "which waybar-module-pacman-updates",
         "exec": "waybar-module-pacman-updates  --interval-seconds 5 --network-interval-seconds 300 --no-zero-input",
         "on-click": "alacritty -e bash -c 'sh ~/.config/waybar/custom/update.sh; exec bash'",
+    },
+    "battery": {
+        "bat": "BAT1",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": " {icon} {capacity}% ",
+        "interval": 1,
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-icons": ["", "", "", "", ""]
     },
       "bluetooth": {
         "format-on": " - ON",

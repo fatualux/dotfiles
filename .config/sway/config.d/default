@@ -13,7 +13,7 @@ set $term-float alacritty
 
 ### Idle configuration
 exec pkill swayidle && swayidle -w\
-    timeout 1070 'swaylock  -C ~/.config/swaylock/config'\
+    timeout 300  'swaylock  -C ~/.config/swaylock/config'\
     timeout 770 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -C ~/.config/swaylock/config'
@@ -81,15 +81,15 @@ popup_during_fullscreen smart
 # BIND SHORTCUTS
 
 # Applications
-bindsym $alt+Control+b exec dunstify -r 333 "FIREFOX" && firefox
-bindsym $alt+Control+h exec dunstify -r 333 "PCManFM" && pcmanfm
-bindsym $alt+Control+n exec dunstify -r 333 "TELEGRAM" && telegram-desktop
-bindsym $alt+Control+t exec dunstify -r 333 "SHELL" && alacritty
-bindsym $alt+Control+k exec dunstify -r 333 "KeePassXC" && keepassxc
-bindsym $alt+Control+g exec dunstify -r 333 "Vim" && alacritty -e vim
-bindsym $alt+Control+a exec dunstify -r 333 "File Manager" && export EDITOR=vim && foot -e joshuto
-bindsym $alt+Control+m exec dunstify -r 333 "Thunderbird" && thunderbird
-bindsym $alt+Control+w exec dunstify -r 333 "Nuclear Player" && nuclear
+bindsym $alt+Control+b exec firefox | dunstify "FIREFOX"
+bindsym $alt+Control+h exec pcmanfm | dunstify "PCMANFM"
+bindsym $alt+Control+n exec telegram-desktop | dunstify "TELEGRAM"
+bindsym $alt+Control+t exec alacritty | dunstify "SHELL"
+bindsym $alt+Control+k exec keepassxc | dunstify "KEEPASSXC"
+bindsym $alt+Control+g exec alacritty -e vim | dunstify "VIM"
+bindsym $alt+Control+a exec export EDITOR=vim | foot -e joshuto | dunstify "JOSHUTO"
+bindsym $alt+Control+m exec thunderbird | dunstify "THUNDERBIRD"
+bindsym $alt+Control+w exec nuclear | dunstify "NUCLEAR"
 bindsym $alt+Control+x exec foot -e sh $HOME/.scripts/bash/launcher.sh
 bindsym $alt+Control+y exec sh $HOME/.scripts/bash/translate.sh
 bindsym $alt+Shift+c exec sh $HOME/.scripts/bash/clipboard.sh -nc

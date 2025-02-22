@@ -194,7 +194,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bindsym $alt+Control+z restart
+bindsym $alt+Control+j restart
 bindsym $alt+Control+r reload
 bindsym $alt+Control+e exec "swaynag -t warning -m 'Do you really want to exit Sway? This will end your session.' -b 'Yes' 'swaymsg exit'"
 

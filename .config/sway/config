@@ -10,4 +10,4 @@ input * {
 }
 
 # Check if XWayland is running
-  exec_always "pgrep -x Xwayland || (setsid sway && swaymsg exit)"
+# exec_always "pgrep -x Xwayland || (setsid sway && swaymsg exit)"

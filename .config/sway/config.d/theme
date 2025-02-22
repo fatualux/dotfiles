@@ -2,7 +2,7 @@
 set $gnome-schema org.gnome.desktop.interface
 
 # Set global GTK Theme preference
-exec_always {
+exec_always --no-startup-id {
   gsettings set $gnome-schema gtk-theme 'Material-Black-Lime-LA'
   gsettings set $gnome-schema icon-theme 'oomox-fz'
   gsettings set $gnome-schema font-name 'Xolonium 11'
@@ -62,6 +62,6 @@ bar {
 }
 
 # Set the background image
-exec_always --no-startup-id pkill swaybg; swaybg -m fill -i ~/.config/sway/wallz/wall_01.jpg &
+exec_always --no-startup-id pkill swaybg && swaybg -m fill -i /home/fz/.config/sway/wallz/wall_01.jpg
 
 seat seat0 xcursor_theme "Dimension" 10

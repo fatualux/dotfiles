@@ -82,8 +82,6 @@ window#waybar.hidden {
 
 }
 
-
-
 #battery,
 #cpu,
 #memory,
@@ -179,7 +177,7 @@ label:focus {
     color: @accent5;
 }
 
-#custom-pacman {
+#custom-updates {
     color: @accent2;
 }
 
@@ -255,13 +253,13 @@ label:focus {
     }
 }
 
-#custom-pacman {
+#custom-updates {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
 
-#custom-pacman.pending-updates {
+#custom-updates.pending-updates {
     animation-name: blink-update;
     animation-duration: 3s;
 }
@@ -289,13 +287,13 @@ label:focus {
 	}
 }
 
-#custom-pacman {
+#custom-updates {
 	animation-timing-function: linear;
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 }
 
-#custom-pacman.pending-updates {
+#custom-updates.pending-updates {
 	animation-name: blink-update;
 	animation-duration: 3s;
 }

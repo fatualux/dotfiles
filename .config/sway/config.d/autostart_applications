@@ -1,7 +1,6 @@
 # Pipewire
 exec pipewire
 exec pipewire-media-session
-exec dunst
 
 ### GNOME-SESSION DEPENDENCIES ###
 # GTK3 applications take a long time to start
@@ -15,9 +14,6 @@ exec nm-applet --indicator
 # Gnome Keyring
 exec gnome-keyring-daemon --daemonize --start --components=gpg,pkcs11,secrets,ssh
 
-# Combine multiple commands into a single exec command
-exec gsettings set org.gnome.desktop.background show-desktop-icons false --user
-
 # Auth with polkit-gnome:
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
@@ -27,20 +23,20 @@ exec libinput-gestures-setup start
 # Xdg DEsktop Portal
 exec /usr/libexec/xdg-desktop-portal
 
-# Use a consistent naming convention for your exec commands
-exec_always gsettings_set_org_gnome_desktop_background show-desktop-icons false --user
-
 ### Autolayout
-exec_always autotiling
+exec_always --no-startup-id autotiling
 
 # Clipman
-exec always wl-paste -t text --watch clipman store --no-persist
+exec_always --no-startup-id wl-paste -t text --watch clipman store --no-persist
 
 # Tracker daemon
 exec_always tracker --no-startup-notification --no-notify
 
 # SwayRD
-exec_always swayrd
+exec_always --no-startup-id swayrd
 
 # BAR CONFIGURATION
 exec_always --no-startup-id ~/.config/waybar/waybar.sh
+
+# Dunst
+exec_always --no-startup-id killall dunst && dunst &

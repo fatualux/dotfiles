@@ -26,6 +26,6 @@ input type:touchpad {
       natural_scroll disabled
 }
 
-input type:keyboard xkb_layout "it"
+input type:keyboard xkb_layout "us"
 input type:keyboard xkb_capslock disabled
 input type:keyboard xkb_numlock enabled

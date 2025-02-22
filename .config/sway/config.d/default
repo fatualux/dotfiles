@@ -7,20 +7,16 @@ set $TERMINAL alacritty
 # BEMENU keybinds
 set $uifont "Xolonium 12"
 set $menu bemenu-run --fn $uifont -b -p "▶" --tf "$prompt" --hf "$highlight" --sf "$highlight" --scf "$highlight" | xargs swaymsg exec
-bindsym $mod+Return exec --no-startup-id $menu
 
 # Your preferred terminal emulators
 set $term-float alacritty
 
 ### Idle configuration
-exec swayidle -w\
-    timeout 1070 'swaylock -f -C ~/.config/swaylock/config'\
+exec pkill swayidle && swayidle -w\
+    timeout 1070 'swaylock  -C ~/.config/swaylock/config'\
     timeout 770 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -C ~/.config/swaylock/config'
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 # Rotate output clockwise
 bindsym $mod+Ctrl+F9 output eDP-1 transform 90
@@ -32,12 +28,9 @@ bindsym $mod+F9 output eDP-1 transform 0
 ### Key bindings
 
 # Basics:
-    # Kill focused window
-    bindsym $mod+q kill
-
     # Start your launcher
     # bindsym $mod+d exec $menu
-    bindsym $mod+d exec $menu
+    bindsym $mod+Return exec --no-startup-id $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -63,15 +56,12 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
 
 # Resize floating windows with mouse scroll:
 bindsym --whole-window --border $mod+button4 resize shrink height 5 px or 5 ppt
 bindsym --whole-window --border $mod+button5 resize grow height 5 px or 5 ppt
 bindsym --whole-window --border $mod+shift+button4 resize shrink width 5 px or 5 ppt
 bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 ppt
-
-floating_modifier $mod
 
 # Make the currently focused window a scratchpad
 bindsym Control+$alt+minus move scratchpad
